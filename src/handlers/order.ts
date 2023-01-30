@@ -1,4 +1,4 @@
-import { Application, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { Order, OrderStore } from '../model/order';
 
 const store = new OrderStore();

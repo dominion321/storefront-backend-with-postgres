@@ -7,8 +7,8 @@ const orders = express.Router();
 
 orders.get('/', orderMethods.index);
 orders.get('/:id', orderMethods.show);
-orders.get('/show/:id', orderMethods.completedOrder);
-orders.get('/show/:id', orderMethods.currentOrder);
+orders.get('/completed/:id', orderMethods.completedOrder);
+orders.get('/active/:id', orderMethods.currentOrder);
 orders.post('/', orderMethods.create);
 
 export default orders;

@@ -45,7 +45,7 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1["default"].config();
 var saltRounds = process.env.SALT_ROUNDS;
-var _a = process.env, SALT_ROUNDS = _a.SALT_ROUNDS, BCRYPT_PASSWORD = _a.BCRYPT_PASSWORD;
+var pepper = process.env.BCRYPT_PASSWORD;
 var UserStore = /** @class */ (function () {
     function UserStore() {
     }
@@ -84,7 +84,7 @@ var UserStore = /** @class */ (function () {
                     case 1:
                         conn = _a.sent();
                         sql = 'INSERT INTO users (firstname, lastname, password_digest) VALUES ($1,$2,$3) RETURNING *';
-                        hash = bcrypt_1["default"].hashSync(u.password + String(BCRYPT_PASSWORD), parseInt(String(SALT_ROUNDS)));
+                        hash = bcrypt_1["default"].hashSync(u.password + pepper, parseInt(saltRounds));
                         return [4 /*yield*/, conn.query(sql, [u.firstname, u.lastname, hash])];
                     case 2:
                         result = _a.sent();

@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const saltRounds = process.env.SALT_ROUNDS;
-const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
+const saltRounds = process.env.SALT_ROUNDS as string;
+const pepper = process.env.BCRYPT_PASSWORD;
 
 export type User = {
   id?: string;
@@ -35,8 +35,8 @@ export class UserStore {
       const sql =
         'INSERT INTO users (firstname, lastname, password_digest) VALUES ($1,$2,$3) RETURNING *';
       const hash = bcrypt.hashSync(
-        u.password + String(BCRYPT_PASSWORD),
-        parseInt(String(SALT_ROUNDS))
+        u.password + pepper,
+        parseInt(saltRounds)
       );
 
       const result = await conn.query(sql, [u.firstname, u.lastname, hash]);

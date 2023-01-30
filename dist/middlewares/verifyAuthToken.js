@@ -11,12 +11,12 @@ var verifyAuthToken = function (req, res, next) {
     try {
         var authorizationHeader = req.headers.authorization;
         var token = authorizationHeader.split(' ')[1];
-        jsonwebtoken_1["default"].verify(token, pepper);
+        console.log(jsonwebtoken_1["default"].verify(token, pepper));
         next();
     }
     catch (error) {
         res.status(401);
-        throw "Error from verify ".concat(error);
+        throw "Access Denied";
     }
 };
 exports["default"] = verifyAuthToken;

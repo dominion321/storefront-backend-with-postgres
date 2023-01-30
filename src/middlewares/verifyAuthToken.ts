@@ -14,12 +14,12 @@ const verifyAuthToken = (
   try {
     const authorizationHeader = req.headers.authorization as string;
     const token = authorizationHeader.split(' ')[1];
-    jwt.verify(token, pepper as string);
+    console.log(jwt.verify(token, pepper as string));
 
     next();
   } catch (error) {
     res.status(401);
-    throw `Error from verify ${error}`;
+    throw `Access Denied`;
   }
 };
 

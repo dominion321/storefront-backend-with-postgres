@@ -45,7 +45,7 @@ var OrderStore = /** @class */ (function () {
     function OrderStore() {
     }
     //CURRENT ORDER Operation
-    OrderStore.prototype.currentOrder = function (id) {
+    OrderStore.prototype.currentOrder = function (user_id) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, error_1;
             return __generator(this, function (_a) {
@@ -55,15 +55,15 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM orders WHERE user_id = $1 AND status =  current';
-                        return [4 /*yield*/, conn.query(sql, [id])];
+                        sql = 'SELECT * FROM orders WHERE user_id=($1) AND status = \'current\'';
+                        return [4 /*yield*/, conn.query(sql, [user_id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         error_1 = _a.sent();
-                        throw new Error("Cannot get current order of user ".concat(id, " ").concat(error_1));
+                        throw new Error("Cannot get current order of user ".concat(user_id, " ").concat(error_1));
                     case 4: return [2 /*return*/];
                 }
             });
@@ -80,12 +80,12 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT * FROM orders WHERE user_id = $1 AND status =  completed';
+                        sql = 'SELECT * FROM orders WHERE user_id=($1) AND status =  \'completed\'';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        return [2 /*return*/, result.rows[0]];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         error_2 = _a.sent();
                         throw new Error("Cannot get completed order of user ".concat(id, " ").concat(error_2));

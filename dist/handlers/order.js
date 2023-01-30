@@ -35,57 +35,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 exports.__esModule = true;
-var verifyAuthToken_1 = __importDefault(require("../middlewares/verifyAuthToken"));
+exports.OrderHandler = void 0;
 var order_1 = require("../model/order");
 var store = new order_1.OrderStore();
-var currentOrder = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, userOrder, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = _req.params.id;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, store.currentOrder(id)];
-            case 2:
-                userOrder = _a.sent();
-                res.status(200).json(userOrder);
-                return [2 /*return*/];
-            case 3:
-                error_1 = _a.sent();
-                throw new Error("Error from orders current Order handler".concat(error_1, " "));
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var completedOrder = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, userOrder, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                id = _req.params.id;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, store.completedOrder(id)];
-            case 2:
-                userOrder = _a.sent();
-                res.status(200).json(userOrder);
-                return [2 /*return*/];
-            case 3:
-                error_2 = _a.sent();
-                throw new Error("Error from orders completed Order handler".concat(error_2, " "));
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var orders_routes = function (app) {
-    app.get('/orders/:id', verifyAuthToken_1["default"], currentOrder);
-    app.get('/orders/completed/:id', verifyAuthToken_1["default"], completedOrder);
-};
-exports["default"] = orders_routes;
+var OrderHandler = /** @class */ (function () {
+    function OrderHandler() {
+    }
+    OrderHandler.prototype.currentOrder = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user_id, userOrder, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        user_id = _req.params.user_id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.currentOrder(user_id)];
+                    case 2:
+                        userOrder = _a.sent();
+                        res.status(200).json(userOrder);
+                        return [2 /*return*/];
+                    case 3:
+                        error_1 = _a.sent();
+                        throw new Error("Error from orders current Order handler".concat(error_1, " "));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ;
+    OrderHandler.prototype.completedOrder = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user_id, userOrder, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        user_id = _req.params.user_id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.completedOrder(user_id)];
+                    case 2:
+                        userOrder = _a.sent();
+                        res.status(200).json(userOrder);
+                        return [2 /*return*/];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new Error("Error from orders completed Order handler".concat(error_2, " "));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ;
+    return OrderHandler;
+}());
+exports.OrderHandler = OrderHandler;

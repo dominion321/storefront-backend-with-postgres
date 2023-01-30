@@ -4,5 +4,3 @@ CREATE TABLE products (
     price integer NOT NULL,
     category VARCHAR
 );
-
-ALTER TABLE products ADD category VARCHAR

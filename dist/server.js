@@ -6,19 +6,16 @@ exports.__esModule = true;
 var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var cors_1 = __importDefault(require("cors"));
-var product_1 = __importDefault(require("./handlers/product"));
-var user_1 = __importDefault(require("./handlers/user"));
-var order_1 = __importDefault(require("./handlers/order"));
+var routes_1 = __importDefault(require("./routes"));
 var app = (0, express_1["default"])();
 var address = '0.0.0.0:3000';
+var corsOptions = {
+    origin: 'http://localhost:3000',
+    optionSuccessStatus: 200
+};
 app.use(body_parser_1["default"].json());
-app.use((0, cors_1["default"])());
-app.get('/', function (_req, res) {
-    res.send('Server Connected');
-});
-(0, product_1["default"])(app);
-(0, user_1["default"])(app);
-(0, order_1["default"])(app);
+app.use((0, cors_1["default"])(corsOptions));
+app.use('/api', routes_1["default"]);
 app.listen(3000, function () {
     console.log("starting app on: ".concat(address));
 });

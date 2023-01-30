@@ -44,7 +44,8 @@ var database_1 = __importDefault(require("../database"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1["default"].config();
-var _a = process.env, SALT_ROUNDS = _a.SALT_ROUNDS, PEPPER = _a.PEPPER;
+var saltRounds = process.env.SALT_ROUNDS;
+var _a = process.env, SALT_ROUNDS = _a.SALT_ROUNDS, BCRYPT_PASSWORD = _a.BCRYPT_PASSWORD;
 var UserStore = /** @class */ (function () {
     function UserStore() {
     }
@@ -58,7 +59,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT username FROM users';
+                        sql = 'SELECT * FROM users';
                         return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
@@ -82,9 +83,9 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'INSERT INTO users (username, password_digest) VALUES ($1,$2)';
-                        hash = bcrypt_1["default"].hashSync(u.password + String(PEPPER), parseInt(String(SALT_ROUNDS)));
-                        return [4 /*yield*/, conn.query(sql, [u.username, hash])];
+                        sql = 'INSERT INTO users (firstname, lastname, password_digest) VALUES ($1,$2,$3) RETURNING *';
+                        hash = bcrypt_1["default"].hashSync(u.password + String(BCRYPT_PASSWORD), parseInt(String(SALT_ROUNDS)));
+                        return [4 /*yield*/, conn.query(sql, [u.firstname, u.lastname, hash])];
                     case 2:
                         result = _a.sent();
                         user = result.rows[0];
@@ -92,7 +93,7 @@ var UserStore = /** @class */ (function () {
                         return [2 /*return*/, user];
                     case 3:
                         err_1 = _a.sent();
-                        throw new Error("Cannot create user ".concat(u.username, " ").concat(err_1));
+                        throw new Error("Cannot create user ".concat(u.firstname, " ").concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
@@ -108,7 +109,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'SELECT username FROM users WHERE id=$1';
+                        sql = 'SELECT * FROM users WHERE id=($1)';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();

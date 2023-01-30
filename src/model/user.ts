@@ -4,11 +4,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { SALT_ROUNDS, PEPPER } = process.env;
+const saltRounds = process.env.SALT_ROUNDS;
+const { SALT_ROUNDS, BCRYPT_PASSWORD } = process.env;
 
 export type User = {
   id?: string;
-  username: string;
+  firstname: string;
+  lastname: string;
   password: string;
 };
 
@@ -16,7 +18,7 @@ export class UserStore {
   async index(): Promise<User[]> {
     try {
       const conn = await Client.connect();
-      const sql = 'SELECT username FROM users';
+      const sql = 'SELECT * FROM users';
 
       const result = await conn.query(sql);
       conn.release();
@@ -27,31 +29,31 @@ export class UserStore {
     }
   }
 
-  async create(u: User): Promise<User[]> {
+  async create(u: User): Promise<User> {
     try {
       const conn = await Client.connect();
       const sql =
-        'INSERT INTO users (username, password_digest) VALUES ($1,$2)';
+        'INSERT INTO users (firstname, lastname, password_digest) VALUES ($1,$2,$3) RETURNING *';
       const hash = bcrypt.hashSync(
-        u.password + String(PEPPER),
+        u.password + String(BCRYPT_PASSWORD),
         parseInt(String(SALT_ROUNDS))
       );
 
-      const result = await conn.query(sql, [u.username, hash]);
+      const result = await conn.query(sql, [u.firstname, u.lastname, hash]);
       const user = result.rows[0];
 
       conn.release();
 
       return user;
     } catch (err) {
-      throw new Error(`Cannot create user ${u.username} ${err}`);
+      throw new Error(`Cannot create user ${u.firstname} ${err}`);
     }
   }
 
-  async show(id: string): Promise<User[]> {
+  async show(id: string): Promise<User> {
     try {
       const conn = await Client.connect();
-      const sql = 'SELECT username FROM users WHERE id=$1';
+      const sql = 'SELECT * FROM users WHERE id=($1)';
 
       const result = await conn.query(sql, [id]);
       conn.release();
@@ -61,18 +63,21 @@ export class UserStore {
       throw new Error(`Cannot get user ${id}. ${error}`);
     }
   }
-  // async authenticate (username: string, password: string): Promise <User | null> {
+
+  // async authenticate(username: string, password: string): Promise<User | null> {
   //   const conn = await Client.connect();
-  //   const sql = 'SELECT password_digest FROM users WHERE username=($1)';
+  //   const sql = 'SELECT password_digest FROM users WHERE firstname=($1)';
 
   //   const result = await conn.query(sql, [username]);
   //   conn.release();
 
-  //   if(result.rows.length) {
-  //     const user =  result.rows[0];
+  //   if (result.rows.length) {
+  //     const user = result.rows[0];
   //     console.log(user);
 
-  //     if(bcrypt.compareSync(password + PEPPER, user.password_digest)) {
+  //     if (
+  //       bcrypt.compareSync(password + BCRYPT_PASSWORD, user.password_digest)
+  //     ) {
   //       return user;
   //     }
   //   }

@@ -39,68 +39,104 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
+exports.UserHandler = void 0;
 var dotenv_1 = __importDefault(require("dotenv"));
 var user_1 = require("../model/user");
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-var verifyAuthToken_1 = __importDefault(require("../middlewares/verifyAuthToken"));
 dotenv_1["default"].config();
 var TOKEN_SECRET = process.env.TOKEN_SECRET;
 var store = new user_1.UserStore();
-var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, store.index()];
-            case 1:
-                users = _a.sent();
-                res.status(200).json(users);
-                return [2 /*return*/];
-            case 2:
-                error_1 = _a.sent();
-                throw new Error("Cannot get users in handler ".concat(error_1));
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, newUser, token, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                user = {
-                    username: _req.body.username,
-                    password: _req.body.password
-                };
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, store.create(user)];
-            case 2:
-                newUser = _a.sent();
-                token = jsonwebtoken_1["default"].sign({ user: newUser }, String(TOKEN_SECRET));
-                console.log(token);
-                return [3 /*break*/, 4];
-            case 3:
-                err_1 = _a.sent();
-                res.status(400);
-                res.json(String(err_1) + user);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var users_routes = function (app) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        try {
-            app.get('/users', verifyAuthToken_1["default"], index);
-            app.post('/users/create', verifyAuthToken_1["default"], create);
-        }
-        catch (err) {
-            throw new Error("Could not parse user routes ".concat(err));
-        }
-        return [2 /*return*/];
-    });
-}); };
-exports["default"] = users_routes;
+var UserHandler = /** @class */ (function () {
+    function UserHandler() {
+    }
+    UserHandler.prototype.index = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var users, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, store.index()];
+                    case 1:
+                        users = _a.sent();
+                        res.status(200).json(users);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw new Error("Cannot get users in handler ".concat(error_1));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ;
+    UserHandler.prototype.create = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, newUser, token, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        user = {
+                            firstname: _req.body.firstname,
+                            lastname: _req.body.lastname,
+                            password: _req.body.password
+                        };
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.create(user)];
+                    case 2:
+                        newUser = _a.sent();
+                        token = jsonwebtoken_1["default"].sign({ user: newUser }, String(TOKEN_SECRET));
+                        res.status(200).json(token);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_1 = _a.sent();
+                        res.status(400);
+                        res.json(String(err_1) + user);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ;
+    UserHandler.prototype.show = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, result, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        id = _req.params.id;
+                        return [4 /*yield*/, store.show(id)];
+                    case 1:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
+                        throw new Error("Cannot get user in handler ".concat(error_2));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return UserHandler;
+}());
+exports.UserHandler = UserHandler;
+// const authenticate = async (_req: Request, res: Response) => {
+//   const {firstname, password} = _req.body
+//   const result = await store.authenticate(firstname, password);
+//   res.status(201).json(result);
+// }
+// const users_routes = async (app: Application) => {
+//   try {
+//     app.get('/users', verifyAuthToken, index);
+//     app.post('/users', verifyAuthToken,create);
+//     // app.post('/users/authenticate', authenticate);
+//   } catch (err) {
+//     throw new Error(`Could not parse user routes ${err}`);
+//   }
+// };
+// export default users_routes;

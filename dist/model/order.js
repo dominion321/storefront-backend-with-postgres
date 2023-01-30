@@ -44,8 +44,8 @@ var database_1 = __importDefault(require("../database"));
 var OrderStore = /** @class */ (function () {
     function OrderStore() {
     }
-    //CURRENT ORDER Operation
-    OrderStore.prototype.currentOrder = function (user_id) {
+    //INDEX Operation
+    OrderStore.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, error_1;
             return __generator(this, function (_a) {
@@ -55,22 +55,22 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM orders WHERE user_id=($1) AND status = 'current'";
-                        return [4 /*yield*/, conn.query(sql, [user_id])];
+                        sql = 'SELECT * FROM orders';
+                        return [4 /*yield*/, conn.query(sql)];
                     case 2:
                         result = _a.sent();
                         conn.release();
-                        return [2 /*return*/, result.rows[0]];
+                        return [2 /*return*/, result.rows];
                     case 3:
                         error_1 = _a.sent();
-                        throw new Error("Cannot get current order of user ".concat(user_id, " ").concat(error_1));
+                        throw new Error("Error from Order Index ".concat(error_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    //COMPLETED ORDER Operation
-    OrderStore.prototype.completedOrder = function (id) {
+    //SHOW Operation
+    OrderStore.prototype.show = function (user_id) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, error_2;
             return __generator(this, function (_a) {
@@ -80,15 +80,93 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "SELECT * FROM orders WHERE user_id=($1) AND status =  'completed'";
+                        sql = 'SELECT * FROM orders WHERE user_id=($1)';
+                        return [4 /*yield*/, conn.query(sql, [user_id])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new Error("Cannot get order of ".concat(user_id, " ").concat(error_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //CREATE Operation
+    OrderStore.prototype.create = function (o) {
+        return __awaiter(this, void 0, void 0, function () {
+            var product_id, quantity, user_id, status, conn, sql, result, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        product_id = o.product_id, quantity = o.quantity, user_id = o.user_id, status = o.status;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 4, , 5]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 2:
+                        conn = _a.sent();
+                        sql = 'INSERT INTO orders (product_id, quantity, user_id, status) VALUES($1,$2) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [status, user_id])];
+                    case 3:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows[0]];
+                    case 4:
+                        error_3 = _a.sent();
+                        throw new Error("Cannot create order ".concat(error_3));
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //CURRENT ORDER Operation
+    OrderStore.prototype.currentOrder = function (user_id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = "SELECT * FROM orders WHERE user_id=($1) AND status = 'active'";
+                        return [4 /*yield*/, conn.query(sql, [user_id])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows[0]];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new Error("Cannot get current order of user ".concat(user_id, " ").concat(error_4));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //COMPLETED ORDER Operation
+    OrderStore.prototype.completedOrder = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = "SELECT * FROM orders WHERE user_id=($1) AND status =  'complete'";
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         result = _a.sent();
                         conn.release();
                         return [2 /*return*/, result.rows];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new Error("Cannot get completed order of user ".concat(id, " ").concat(error_2));
+                        error_5 = _a.sent();
+                        throw new Error("Cannot get completed order of user ".concat(id, " ").concat(error_5));
                     case 4: return [2 /*return*/];
                 }
             });

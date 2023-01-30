@@ -42,9 +42,80 @@ var store = new order_1.OrderStore();
 var OrderHandler = /** @class */ (function () {
     function OrderHandler() {
     }
+    OrderHandler.prototype.index = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, store.index()];
+                    case 1:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw new Error("Error from orders index handler ".concat(error_1));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrderHandler.prototype.show = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user_id, result, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        user_id = _req.params.user_id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.show(user_id)];
+                    case 2:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new Error("Error from orders show handler ".concat(error_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrderHandler.prototype.create = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var order, result, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        order = {
+                            product_id: _req.body.product_id,
+                            quantity: _req.body.quantity,
+                            status: _req.body.status,
+                            user_id: _req.body.user_id
+                        };
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.create(order)];
+                    case 2:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_3 = _a.sent();
+                        throw new Error("Error from orders create handler ".concat(error_3));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     OrderHandler.prototype.currentOrder = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user_id, userOrder, error_1;
+            var user_id, userOrder, error_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -56,10 +127,10 @@ var OrderHandler = /** @class */ (function () {
                     case 2:
                         userOrder = _a.sent();
                         res.status(200).json(userOrder);
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
                     case 3:
-                        error_1 = _a.sent();
-                        throw new Error("Error from orders current Order handler".concat(error_1, " "));
+                        error_4 = _a.sent();
+                        throw new Error("Error from orders current Order handler".concat(error_4, " "));
                     case 4: return [2 /*return*/];
                 }
             });
@@ -67,7 +138,7 @@ var OrderHandler = /** @class */ (function () {
     };
     OrderHandler.prototype.completedOrder = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user_id, userOrder, error_2;
+            var user_id, userOrder, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -79,10 +150,10 @@ var OrderHandler = /** @class */ (function () {
                     case 2:
                         userOrder = _a.sent();
                         res.status(200).json(userOrder);
-                        return [2 /*return*/];
+                        return [3 /*break*/, 4];
                     case 3:
-                        error_2 = _a.sent();
-                        throw new Error("Error from orders completed Order handler".concat(error_2, " "));
+                        error_5 = _a.sent();
+                        throw new Error("Error from orders completed Order handler".concat(error_5, " "));
                     case 4: return [2 /*return*/];
                 }
             });

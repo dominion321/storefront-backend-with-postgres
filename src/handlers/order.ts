@@ -25,6 +25,8 @@ export class OrderHandler {
 
   async create(_req: Request, res: Response) {
     const order: Order = {
+      product_id: _req.body.product_id,
+      quantity: _req.body.quantity,
       status: _req.body.status,
       user_id: _req.body.user_id,
     };

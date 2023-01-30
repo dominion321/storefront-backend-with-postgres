@@ -4,6 +4,8 @@ export type Order = {
   id?: string;
   status: string;
   user_id: string;
+  product_id: string;
+  quantity: string;
 };
 
 export class OrderStore {
@@ -39,11 +41,11 @@ export class OrderStore {
 
   //CREATE Operation
   async create(o: Order): Promise<Order> {
-    const { status, user_id } = o;
+    const { product_id, quantity, user_id, status } = o;
     try {
       const conn = await Client.connect();
       const sql =
-        'INSERT INTO orders (status, user_id) VALUES($1,$2) RETURNING *';
+        'INSERT INTO orders (product_id, quantity, user_id, status) VALUES($1,$2) RETURNING *';
 
       const result = await conn.query(sql, [status, user_id]);
       conn.release();
@@ -59,7 +61,7 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql =
-        "SELECT * FROM orders WHERE user_id=($1) AND status = 'current'";
+        "SELECT * FROM orders WHERE user_id=($1) AND status = 'active'";
 
       const result = await conn.query(sql, [user_id]);
       conn.release();
@@ -75,7 +77,7 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql =
-        "SELECT * FROM orders WHERE user_id=($1) AND status =  'completed'";
+        "SELECT * FROM orders WHERE user_id=($1) AND status =  'complete'";
 
       const result = await conn.query(sql, [id]);
       conn.release();

@@ -4,7 +4,7 @@ import { OrderStore } from '../model/order';
 const store = new OrderStore();
 
 export class OrderHandler {
-  async currentOrder(_req: Request, res: Response){
+  async currentOrder(_req: Request, res: Response) {
     const user_id = _req.params.user_id;
     try {
       const userOrder = await store.currentOrder(user_id);
@@ -13,9 +13,9 @@ export class OrderHandler {
     } catch (error) {
       throw new Error(`Error from orders current Order handler${error} `);
     }
-  };
-  
-  async completedOrder(_req: Request, res: Response){
+  }
+
+  async completedOrder(_req: Request, res: Response) {
     const user_id = _req.params.user_id;
     try {
       const userOrder = await store.completedOrder(user_id);
@@ -24,6 +24,5 @@ export class OrderHandler {
     } catch (error) {
       throw new Error(`Error from orders completed Order handler${error} `);
     }
-  };
-  
+  }
 }

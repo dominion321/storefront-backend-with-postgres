@@ -11,7 +11,7 @@ var verifyAuthToken = function (req, res, next) {
     try {
         var authorizationHeader = req.headers.authorization;
         var token = authorizationHeader.split(' ')[1];
-        console.log(jsonwebtoken_1["default"].verify(token, pepper));
+        jsonwebtoken_1["default"].verify(token, pepper);
         next();
     }
     catch (error) {

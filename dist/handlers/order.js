@@ -65,7 +65,6 @@ var OrderHandler = /** @class */ (function () {
             });
         });
     };
-    ;
     OrderHandler.prototype.completedOrder = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var user_id, userOrder, error_2;
@@ -89,7 +88,6 @@ var OrderHandler = /** @class */ (function () {
             });
         });
     };
-    ;
     return OrderHandler;
 }());
 exports.OrderHandler = OrderHandler;

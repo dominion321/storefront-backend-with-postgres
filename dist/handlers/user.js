@@ -69,7 +69,6 @@ var UserHandler = /** @class */ (function () {
             });
         });
     };
-    ;
     UserHandler.prototype.create = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var user, newUser, token, err_1;
@@ -100,7 +99,6 @@ var UserHandler = /** @class */ (function () {
             });
         });
     };
-    ;
     UserHandler.prototype.show = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var id, result, error_2;

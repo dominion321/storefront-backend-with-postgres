@@ -4,7 +4,7 @@ import { ProductStore, Product } from '../model/product';
 const store = new ProductStore();
 
 export class ProductHandler {
-  async index(_req: Request, res: Response){
+  async index(_req: Request, res: Response) {
     try {
       const result = await store.index();
       res.status(200).json(result);
@@ -12,9 +12,9 @@ export class ProductHandler {
     } catch (err) {
       throw new Error(`Cannot get index ${err}`);
     }
-  };
+  }
 
-  async create(_req: Request, res: Response){
+  async create(_req: Request, res: Response) {
     try {
       const { name, price, category } = _req.body;
       const result = await store.create({ name, price, category });
@@ -23,9 +23,9 @@ export class ProductHandler {
     } catch (err) {
       throw new Error(`Cannot create product ${_req.body.name}. ${err}`);
     }
-  };
+  }
 
-  async show(_req: Request, res: Response){
+  async show(_req: Request, res: Response) {
     try {
       const result = await store.show(String(_req.params.id));
       res.status(200).json(result);
@@ -33,9 +33,9 @@ export class ProductHandler {
     } catch (error) {
       throw new Error(`Cannot get product ${_req.params.id} ${error}`);
     }
-  };
-  
-  async productsByCategory(_req: Request, res: Response){
+  }
+
+  async productsByCategory(_req: Request, res: Response) {
     const category = _req.params.category;
     try {
       const result = await store.productsByCategory(category);
@@ -44,14 +44,8 @@ export class ProductHandler {
     } catch (error) {
       throw new Error(`Error from Products by Category handler ${error}`);
     }
-  };
+  }
 }
-
-
-
-
-
-
 
 // const products_routes = (app: Application) => {
 //   try {
@@ -63,4 +57,3 @@ export class ProductHandler {
 //     throw new Error(`Cannot parse routes. ${err}`);
 //   }
 // };
-

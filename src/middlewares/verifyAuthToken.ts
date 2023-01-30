@@ -4,17 +4,13 @@ import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
-const pepper = process.env.TOKEN_SECRET ;
+const pepper = process.env.TOKEN_SECRET;
 
-const verifyAuthToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorizationHeader = req.headers.authorization as string;
     const token = authorizationHeader.split(' ')[1];
-    console.log(jwt.verify(token, pepper as string));
+    jwt.verify(token, pepper as string);
 
     next();
   } catch (error) {

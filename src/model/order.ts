@@ -11,7 +11,7 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql =
-        'SELECT * FROM orders WHERE user_id=($1) AND status = \'current\'';
+        "SELECT * FROM orders WHERE user_id=($1) AND status = 'current'";
 
       const result = await conn.query(sql, [user_id]);
       conn.release();
@@ -27,7 +27,7 @@ export class OrderStore {
     try {
       const conn = await Client.connect();
       const sql =
-        'SELECT * FROM orders WHERE user_id=($1) AND status =  \'completed\'';
+        "SELECT * FROM orders WHERE user_id=($1) AND status =  'completed'";
 
       const result = await conn.query(sql, [id]);
       conn.release();

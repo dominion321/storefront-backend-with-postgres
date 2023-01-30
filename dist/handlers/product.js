@@ -35,98 +35,107 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 exports.__esModule = true;
-var verifyAuthToken_1 = __importDefault(require("../middlewares/verifyAuthToken"));
+exports.ProductHandler = void 0;
 var product_1 = require("../model/product");
 var store = new product_1.ProductStore();
-var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, err_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, store.index()];
-            case 1:
-                result = _a.sent();
-                res.status(200).json(result);
-                return [2 /*return*/];
-            case 2:
-                err_1 = _a.sent();
-                throw new Error("Cannot get index ".concat(err_1));
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-var create = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, price, category, result, err_2;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = _req.body, name_1 = _a.name, price = _a.price, category = _a.category;
-                return [4 /*yield*/, store.create({ name: name_1, price: price, category: category })];
-            case 1:
-                result = _b.sent();
-                res.status(201).json(result);
-                return [2 /*return*/];
-            case 2:
-                err_2 = _b.sent();
-                throw new Error("Cannot create product ".concat(_req.body.name, ". ").concat(err_2));
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-var show = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var result, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, store.show(String(_req.params.id))];
-            case 1:
-                result = _a.sent();
-                res.status(200).json(result);
-                return [2 /*return*/];
-            case 2:
-                error_1 = _a.sent();
-                throw new Error("Cannot get product ".concat(_req.params.id, " ").concat(error_1));
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-var productsByCategory = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var category, result, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                category = _req.params.category;
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, store.productsByCategory(category)];
-            case 2:
-                result = _a.sent();
-                res.status(200).json(result);
-                return [2 /*return*/];
-            case 3:
-                error_2 = _a.sent();
-                throw new Error("Error from Products by Category handler ".concat(error_2));
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var products_routes = function (app) {
-    try {
-        app.get('/products', index);
-        app.post('/products', verifyAuthToken_1["default"], create);
-        app.get('/products/:id', show);
-        app.get('/products/:category', productsByCategory);
+var ProductHandler = /** @class */ (function () {
+    function ProductHandler() {
     }
-    catch (err) {
-        throw new Error("Cannot parse routes. ".concat(err));
-    }
-};
-exports["default"] = products_routes;
+    ProductHandler.prototype.index = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, store.index()];
+                    case 1:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [2 /*return*/];
+                    case 2:
+                        err_1 = _a.sent();
+                        throw new Error("Cannot get index ".concat(err_1));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProductHandler.prototype.create = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, name_1, price, category, result, err_2;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = _req.body, name_1 = _a.name, price = _a.price, category = _a.category;
+                        return [4 /*yield*/, store.create({ name: name_1, price: price, category: category })];
+                    case 1:
+                        result = _b.sent();
+                        res.status(201).json(result);
+                        return [2 /*return*/];
+                    case 2:
+                        err_2 = _b.sent();
+                        throw new Error("Cannot create product ".concat(_req.body.name, ". ").concat(err_2));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProductHandler.prototype.show = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, store.show(String(_req.params.id))];
+                    case 1:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [2 /*return*/];
+                    case 2:
+                        error_1 = _a.sent();
+                        throw new Error("Cannot get product ".concat(_req.params.id, " ").concat(error_1));
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProductHandler.prototype.productsByCategory = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var category, result, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        category = _req.params.category;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.productsByCategory(category)];
+                    case 2:
+                        result = _a.sent();
+                        res.status(200).json(result);
+                        return [2 /*return*/];
+                    case 3:
+                        error_2 = _a.sent();
+                        throw new Error("Error from Products by Category handler ".concat(error_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return ProductHandler;
+}());
+exports.ProductHandler = ProductHandler;
+// const products_routes = (app: Application) => {
+//   try {
+//     app.get('/products', index);
+//     app.post('/products', verifyAuthToken, create);
+//     app.get('/products/:id', show);
+//     app.get('/products/:category', productsByCategory);
+//   } catch (err) {
+//     throw new Error(`Cannot parse routes. ${err}`);
+//   }
+// };

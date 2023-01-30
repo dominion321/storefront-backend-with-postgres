@@ -7,7 +7,7 @@
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "migrate": "db-migrate --env test up && db-migrate up",
-    "test": "ENV=TEST db-migrate --env test up && jasmine-ts && db-migrate db:drop test ",
+    "test": "db-migrate --env test up && jasmine-ts && db-migrate db:drop test ",
     "tsc": "tsc",
     "prettier": "prettier --config .prettierrc src/**/*.ts --write"
   },

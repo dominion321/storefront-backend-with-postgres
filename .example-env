@@ -1,0 +1,9 @@
+POSTGRES_DB=<Enter a Database name>
+POSTGRES_TEST_DB=<Enter a Database>
+POSTGRES_USER=<Enter a user>
+POSTGRES_PASSWORD=<Enter a password>
+POSTGRES_HOST=127.0.0.1
+BCRYPT_PASSWORD=<Enter a password>
+SALT_ROUNDS=<Enter a number>
+ENV=test
+TOKEN_SECRET=<Enter a password>

@@ -6,13 +6,13 @@ import { response } from 'express';
 const store = new OrderStore();
 const request = supertest(app);
 
-let stat: string = "active";
+let stat: string = 'active';
 const newOrder: Order = {
   status: stat,
-  user_id: "1",
-  product_id: "1",
-  quantity: "200"
-}
+  user_id: '1',
+  product_id: '1',
+  quantity: '200',
+};
 
 describe('Order Model', () => {
   it('should have an index method', () => {
@@ -38,8 +38,7 @@ describe('Order Model', () => {
 
 describe('Order Endpoints', () => {
   it('should have an index method by endpoint', async () => {
-    const response = await request.get('/api/orders')
+    const response = await request.get('/api/orders');
     expect(response.status).toBe(200);
-  });  
+  });
 });
-

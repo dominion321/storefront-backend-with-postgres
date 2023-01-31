@@ -32,21 +32,21 @@ describe('Product Model', () => {
 
 describe('Product Endpoints', () => {
   it('should have an index method by endpoint', async () => {
-    const response = await request.get('/api/products')
+    const response = await request.get('/api/products');
     expect(response.status).toBe(200);
   });
 
-  it('should successfully show a product by endpoint', async() => {
-    const response = await request.get('/api/products/1')
+  it('should successfully show a product by endpoint', async () => {
+    const response = await request.get('/api/products/1');
     expect(response.status).toBe(200);
   });
 
   it('should successfully create a product by endpoint', async () => {
-    const response = await request.post('/products').send({product});
+    const response = await request.post('/products').send({ product });
     expect(response.status).toBe(200);
   });
-  it('should successfully show products by given category by endpoint', async() => {
-    const response = await request.get(`/api/products/${category}`)
+  it('should successfully show products by given category by endpoint', async () => {
+    const response = await request.get(`/api/products/${category}`);
     expect(response.status).toBe(200);
   });
 });

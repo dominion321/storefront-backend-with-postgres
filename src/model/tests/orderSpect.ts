@@ -37,7 +37,7 @@ describe('Order Model', () => {
 });
 
 describe('Order Endpoints', () => {
-  it('should have an index method', async () => {
+  it('should have an index method by endpoint', async () => {
     const response = await request.get('/api/orders')
     expect(response.status).toBe(200);
   });  

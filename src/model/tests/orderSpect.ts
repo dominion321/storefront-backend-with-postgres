@@ -1,6 +1,18 @@
-import { OrderStore } from '../order';
+import { Order, OrderStore } from '../order';
+import supertest from 'supertest';
+import app from '../../server';
+import { response } from 'express';
 
 const store = new OrderStore();
+const request = supertest(app);
+
+let stat: string = "active";
+const newOrder: Order = {
+  status: stat,
+  user_id: "1",
+  product_id: "1",
+  quantity: "200"
+}
 
 describe('Order Model', () => {
   it('should have an index method', () => {
@@ -12,7 +24,7 @@ describe('Order Model', () => {
   });
 
   it('should have an create method', () => {
-    expect(store.create).toBeDefined();
+    expect(store.create(newOrder)).toBeDefined();
   });
 
   it('should have a completed order method', () => {
@@ -23,3 +35,11 @@ describe('Order Model', () => {
     expect(store.currentOrder).toBeDefined();
   });
 });
+
+describe('Order Endpoints', () => {
+  it('should have an index method', async () => {
+    const response = await request.get('/api/orders')
+    expect(response.status).toBe(200);
+  });  
+});
+

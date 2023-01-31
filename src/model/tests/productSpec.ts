@@ -42,7 +42,7 @@ describe('Product Endpoints', () => {
   });
 
   it('should successfully create a product by endpoint', async () => {
-    const response = await request.post('/products').send({ product });
+    const response = await request.post('/products').send(product);
     expect(response.status).toBe(200);
   });
   it('should successfully show products by given category by endpoint', async () => {

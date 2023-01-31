@@ -24,3 +24,4 @@ describe('User Model', () => {
     expect(store.create(newUser)).toBeDefined();
   });
 });
+

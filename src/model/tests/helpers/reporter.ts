@@ -7,7 +7,7 @@ import SuiteInfo = jasmine.SuiteInfo;
 
 class CustomProcessor extends DisplayProcessor {
   public displayJasmineStarted(info: SuiteInfo, log: string): string {
-    return `${log}`;
+    return `TypeScript ${log}`;
   }
 }
 

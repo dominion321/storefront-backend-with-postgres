@@ -52,14 +52,3 @@ export class ProductHandler {
     }
   }
 }
-
-// const products_routes = (app: Application) => {
-//   try {
-//     app.get('/products', index);
-//     app.post('/products', verifyAuthToken, create);
-//     app.get('/products/:id', show);
-//     app.get('/products/:category', productsByCategory);
-//   } catch (err) {
-//     throw new Error(`Cannot parse routes. ${err}`);
-//   }
-// };

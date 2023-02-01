@@ -29,7 +29,7 @@ export class UserHandler {
     try {
       const newUser = await store.create(user);
       let token = jwt.sign({ user: newUser }, String(TOKEN_SECRET));
-      res.status(200).json(token);
+      res.status(201).json(token);
     } catch (err) {
       res.status(400);
       res.json(String(err) + user);

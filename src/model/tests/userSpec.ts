@@ -25,3 +25,20 @@ describe('User Model', () => {
     expect(store.create(newUser)).toBeDefined();
   });
 });
+
+describe('User Endpoint', () => {
+  it('should have an index method by endpoint', async () => {
+    const response = await request.post('/api/users').send(newUser)
+    expect(response.status).toBe(201);
+  });
+
+  it('should have an error when getting index by endpoint', async () => {
+    const response = await request.get('/api/users')
+    expect(response.status).toBe(401);
+  });
+
+  it('should have an error when getting a specific user by endpoint', async () => {
+    const response = await request.get('/api/users/1')
+    expect(response.status).toBe(401);
+  });
+});

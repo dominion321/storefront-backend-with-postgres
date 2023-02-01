@@ -56,4 +56,10 @@ describe('Product Endpoints', () => {
     const response = await request.get(`/api/products/category/${category}`);
     expect(response.status).toBe(200);
   });
+
+  it('should successfully delete products by endpoint', async () => {
+    await request.post(`/api/products`).send(product);
+    const response = await request.delete(`/api/products/2`);
+    expect(response.status).toBe(200);
+  });
 });

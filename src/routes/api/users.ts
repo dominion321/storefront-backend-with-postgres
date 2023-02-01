@@ -6,8 +6,8 @@ const userMethods = new UserHandler();
 
 const users = express.Router();
 
-users.get('/index', verifyAuthToken, userMethods.index);
-users.get('/show/:id', verifyAuthToken, userMethods.show);
-users.post('/create', userMethods.create);
+users.get('/', verifyAuthToken, userMethods.index);
+users.get('/:id', verifyAuthToken, userMethods.show);
+users.post('/', userMethods.create);
 
 export default users;

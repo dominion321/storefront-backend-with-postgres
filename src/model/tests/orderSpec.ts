@@ -1,12 +1,12 @@
 import { Order, OrderStore } from '../order';
 import supertest from 'supertest';
 import app from '../../server';
-import { response } from 'express';
 
 const store = new OrderStore();
 const request = supertest(app);
 
 let stat: string = 'active';
+
 const newOrder: Order = {
   status: stat,
   user_id: '1',
@@ -23,7 +23,7 @@ describe('Order Model', () => {
     expect(store.show).toBeDefined();
   });
 
-  it('should have an create method', () => {
+  it('should have a create method', () => {
     expect(store.create(newOrder)).toBeDefined();
   });
 

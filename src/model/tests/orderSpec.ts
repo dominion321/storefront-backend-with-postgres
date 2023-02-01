@@ -1,7 +1,6 @@
 import { Order, OrderStore } from '../order';
 import supertest from 'supertest';
 import app from '../../server';
-import client from '../../database';
 
 const store = new OrderStore();
 const request = supertest(app);

@@ -29,7 +29,7 @@ class UserHandler {
         try {
             const newUser = await store.create(user);
             let token = jsonwebtoken_1.default.sign({ user: newUser }, String(TOKEN_SECRET));
-            res.status(200).json(token);
+            res.status(201).json(token);
         }
         catch (err) {
             res.status(400);

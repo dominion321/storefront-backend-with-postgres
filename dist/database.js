@@ -20,4 +20,5 @@ const client = new pg_1.Pool({
     password: POSTGRES_PASSWORD,
     database: db,
 });
+console.log(db);
 exports.default = client;

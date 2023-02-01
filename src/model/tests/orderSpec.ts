@@ -1,6 +1,7 @@
 import { Order, OrderStore } from '../order';
 import supertest from 'supertest';
 import app from '../../server';
+import client from '../../database';
 
 const store = new OrderStore();
 const request = supertest(app);
@@ -13,6 +14,7 @@ const newOrder: Order = {
   product_id: '1',
   quantity: '200',
 };
+
 
 describe('Order Model', () => {
   it('should have an index method', () => {

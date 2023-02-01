@@ -22,7 +22,7 @@ describe('Order Model', () => {
     it('should have a show method', () => {
         expect(store.show).toBeDefined();
     });
-    it('should have an create method', () => {
+    it('should have a create method', () => {
         expect(store.create(newOrder)).toBeDefined();
     });
     it('should have a completed order method', () => {

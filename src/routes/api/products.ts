@@ -8,5 +8,6 @@ products.get('/', productMethods.index);
 products.get('/:id', productMethods.show);
 products.get('/category/:category', productMethods.productsByCategory);
 products.post('/', productMethods.create);
+products.delete('/:product_id', productMethods.destroy);
 
 export default products;

@@ -11,6 +11,7 @@ const newUser: User = {
   password: 'password',
 };
 
+
 describe('User Model', () => {
   it('should have an index method', () => {
     expect(store.index).toBeDefined();
@@ -24,4 +25,3 @@ describe('User Model', () => {
     expect(store.create(newUser)).toBeDefined();
   });
 });
-

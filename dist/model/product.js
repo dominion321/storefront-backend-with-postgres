@@ -53,6 +53,18 @@ class ProductStore {
             throw new Error(`Error from products by category method ${error}`);
         }
     }
+    async destory(product_id) {
+        try {
+            const conn = await database_1.default.connect();
+            const sql = 'DELETE FROM products WHERE id=$1';
+            const result = await database_1.default.query(sql, [product_id]);
+            conn.release();
+            return;
+        }
+        catch (error) {
+            throw new Error(`Could Not Delete. ${error}`);
+        }
+    }
     //UPDATE Operation
     async update(p) {
         try {

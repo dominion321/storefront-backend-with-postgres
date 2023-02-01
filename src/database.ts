@@ -27,4 +27,6 @@ const client = new Pool({
   database: db,
 });
 
+console.log(db);
+
 export default client;

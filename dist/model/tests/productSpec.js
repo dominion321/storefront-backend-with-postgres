@@ -11,7 +11,7 @@ const store = new product_1.ProductStore();
 const product = {
     name: 'test',
     price: 300,
-    category: 'test',
+    category: 'food',
 };
 const category = 'food';
 describe('Product Model', () => {
@@ -27,6 +27,9 @@ describe('Product Model', () => {
     it('should successfully show products by given category', () => {
         expect(store.productsByCategory(category)).toBeDefined();
     });
+    it('should successfully delete a product', () => {
+        expect(store.destory('1')).toBeDefined();
+    });
 });
 describe('Product Endpoints', () => {
     it('should have an index method by endpoint', async () => {
@@ -38,11 +41,12 @@ describe('Product Endpoints', () => {
         expect(response.status).toBe(200);
     });
     it('should successfully create a product by endpoint', async () => {
-        const response = await request.post('/products').send(product);
-        expect(response.status).toBe(200);
+        const response = await request.post('/api/products').send(product);
+        expect(response.status).toBe(201);
     });
     it('should successfully show products by given category by endpoint', async () => {
-        const response = await request.get(`/api/products/${category}`);
+        await request.post(`/api/products`).send(product);
+        const response = await request.get(`/api/products/category/${category}`);
         expect(response.status).toBe(200);
     });
 });

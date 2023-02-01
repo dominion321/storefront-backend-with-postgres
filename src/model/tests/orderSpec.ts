@@ -42,4 +42,16 @@ describe('Order Endpoints', () => {
     const response = await request.get('/api/orders');
     expect(response.status).toBe(200);
   });
+  it('should have a show method by endpoint', async () => {
+    const response = await request.get('/api/orders/1');
+    expect(response.status).toBe(200);
+  });
+  it('should have a create method by endpoint', async () => {
+    const response = await request.post('/api/orders').send(newOrder);
+    expect(response.status).toBe(200);
+  });
+  it('should have a completed method by endpoint', async () => {
+    const response = await request.get('/api/orders/complete');
+    expect(response.status).toBe(200);
+  });
 });

@@ -51,7 +51,11 @@ describe('Order Endpoints', () => {
     expect(response.status).toBe(200);
   });
   it('should have a completed method by endpoint', async () => {
-    const response = await request.get('/api/orders/complete');
+    const response = await request.get('/api/orders/completed/1');
+    expect(response.status).toBe(200);
+  });
+  it('should have a active method by endpoint', async () => {
+    const response = await request.get('/api/orders/active/2');
     expect(response.status).toBe(200);
   });
 });

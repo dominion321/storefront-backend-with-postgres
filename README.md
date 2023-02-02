@@ -43,7 +43,7 @@ You can create users, get all users but based on JWT Authorization, get users by
 - POST route: `'api/users'` [POST] 
 
 ## Required Technologies
-Your application uses the following libraries:
+This application uses the following libraries:
 - Postgres for the database
 - Node/Express for the application logic
 - dotenv from npm for managing environment variables

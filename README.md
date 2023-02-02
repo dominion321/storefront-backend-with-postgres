@@ -36,7 +36,12 @@ You can create products, get all products, get products by an id number, get pro
 - POST route: 'api/products' [POST] 
 - DELETE route: 'api/products/:product_id' [DELETE]
 
+### Users
+You can create users, get all users but based on JWT Authorization, get users by id but based on JWT Authorization The following outline how this is carried out:
 
+- GET route: 'api/users' [GET]
+- SHOW route: 'api/users/:id' [GET]
+- POST route: 'api/users' [POST] 
 
 ## Required Technologies
 Your application uses the following libraries:

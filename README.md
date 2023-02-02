@@ -18,6 +18,13 @@
 ## Endpoints
 This application 
 
+### Orders
+You can create orders, get all orders, get orders by an id number, get completed and active orders. The following outline how this is carried out:
+
+- GET route: 'api/orders' [GET]
+- SHOW route: 'api/orders/:id' [GET]
+- - POST route: 'api/orders' [POST] -
+
 ## Required Technologies
 Your application uses the following libraries:
 - Postgres for the database

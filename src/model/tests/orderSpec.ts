@@ -13,10 +13,10 @@ beforeAll(async () => {
   const conn = await client.connect();
   const sql = 'SELECT * FROM orders';
   const result = await conn.query(sql);
-  conn.release()
+  conn.release();
 
   console.log(result);
-})
+});
 
 const newOrder: Order = {
   status: stat,
@@ -24,8 +24,6 @@ const newOrder: Order = {
   product_id: '3',
   quantity: '200',
 };
-
-
 
 const order = new OrderHandler();
 

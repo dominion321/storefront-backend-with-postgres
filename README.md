@@ -16,12 +16,11 @@
 - To test the application, run <code>npm run test</code>.
 
 ## Endpoints
-This application 
 
 ### Orders
 You can create orders, get all orders, get orders by an id number, get completed and active orders. The following outline how this is carried out:
 
-- GET route: 'api/orders' [GET]
+- GET route: `'api/orders'` [GET]
 - SHOW route: 'api/orders/:id' [GET]
 - POST route: 'api/orders' [POST] 
 - GET COMPLETE ORDER route: 'api/orders/complete/:id' [SHOW]
@@ -51,3 +50,4 @@ Your application uses the following libraries:
 - db-migrate from npm for migrations
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
+

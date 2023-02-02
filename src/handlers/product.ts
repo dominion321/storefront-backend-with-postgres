@@ -48,7 +48,6 @@ export class ProductHandler {
       res.status(200).json(`Delete successful`);
     } catch (error) {
       throw new Error(`Error in deletion ${error}`);
-      
     }
   }
 }

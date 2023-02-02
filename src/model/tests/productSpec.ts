@@ -12,15 +12,14 @@ const product: Product = {
   category: 'food',
 };
 
-
 beforeAll(async () => {
   const conn = await client.connect();
   const sql = 'SELECT * FROM products';
   const result = await conn.query(sql);
-  conn.release()
+  conn.release();
 
   console.log(result.rows);
-})
+});
 const category = 'food';
 
 describe('Product Model', () => {

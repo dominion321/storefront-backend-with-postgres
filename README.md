@@ -8,7 +8,15 @@
 - You would also need to run `docker compose up` to set up the database for the application.
 - Afterwards, run `db-migrate up` to create all given tables.
 
+## Scripts to run
+- To get started with the application, run <code>npm install</code> in your console.
 
+- To build and run the application, run <code>npm run watch</code>.
+
+- To test the application, run <code>npm run test</code>.
+
+## Endpoints
+This application 
 
 ## Required Technologies
 Your application uses the following libraries:

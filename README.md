@@ -51,5 +51,3 @@ Your application uses the following libraries:
 - db-migrate from npm for migrations
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
-
-## Steps to Completion

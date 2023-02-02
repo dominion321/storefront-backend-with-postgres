@@ -23,7 +23,9 @@ You can create orders, get all orders, get orders by an id number, get completed
 
 - GET route: 'api/orders' [GET]
 - SHOW route: 'api/orders/:id' [GET]
-- - POST route: 'api/orders' [POST] -
+- POST route: 'api/orders' [POST] 
+- GET COMPLETE ORDER route: 'api/orders/complete/:id' [SHOW]
+- GET ACTIVE ORDER route: 'api/orders/active/:id' [SHOW]
 
 ## Required Technologies
 Your application uses the following libraries:

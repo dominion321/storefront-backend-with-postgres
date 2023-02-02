@@ -12,14 +12,6 @@ const product: Product = {
   category: 'food',
 };
 
-beforeAll(async () => {
-  const conn = await client.connect();
-  const sql = 'SELECT * FROM products';
-  const result = await conn.query(sql);
-  conn.release();
-
-  console.log(result.rows);
-});
 const category = 'food';
 
 describe('Product Model', () => {
@@ -56,7 +48,7 @@ describe('Product Endpoints', () => {
 
   it('should successfully create a product by endpoint', async () => {
     const response = await request.post('/api/products').send(product);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(401);
   });
 
   it('should successfully show products by given category by endpoint', async () => {

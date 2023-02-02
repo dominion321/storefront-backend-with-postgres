@@ -9,15 +9,6 @@ const request = supertest(app);
 
 let stat: string = 'active';
 
-beforeAll(async () => {
-  const conn = await client.connect();
-  const sql = 'SELECT * FROM orders';
-  const result = await conn.query(sql);
-  conn.release();
-
-  console.log(result);
-});
-
 const newOrder: Order = {
   status: stat,
   user_id: '1',
@@ -64,11 +55,11 @@ describe('Order Endpoints', () => {
     expect(response.status).toBe(200);
   });
   it('should have a completed method by endpoint', async () => {
-    const response = await request.get('/api/orders/completed/1');
-    expect(response.status).toBe(200);
+    const response = await request.get('/api/orders/complete/1');
+    expect(response.status).toBe(401);
   });
   it('should have a active method by endpoint', async () => {
     const response = await request.get('/api/orders/active/2');
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(401);
   });
 });

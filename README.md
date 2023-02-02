@@ -27,6 +27,17 @@ You can create orders, get all orders, get orders by an id number, get completed
 - GET COMPLETE ORDER route: 'api/orders/complete/:id' [SHOW]
 - GET ACTIVE ORDER route: 'api/orders/active/:id' [SHOW]
 
+### Products
+You can create products, get all products, get products by an id number, get products by category, and delete a product. The following outline how this is carried out:
+
+- GET route: 'api/products' [GET]
+- GET route: 'api/products/category/:category' [GET]
+- SHOW route: 'api/products/:id' [GET]
+- POST route: 'api/products' [POST] 
+- DELETE route: 'api/products/:product_id' [DELETE]
+
+
+
 ## Required Technologies
 Your application uses the following libraries:
 - Postgres for the database

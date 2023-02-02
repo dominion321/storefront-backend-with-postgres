@@ -6,6 +6,7 @@
 ## Setup and Required Document edits 
 - To make this application tailored to your specifications, you need to create a `.env` file. Follow the requirements for that file from the `.example-env` file.
 - You would also need to run `docker compose up` to set up the database for the application.
+- Afterwards, run `db-migrate up` to create all given tables.
 
 
 

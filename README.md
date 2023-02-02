@@ -21,26 +21,26 @@
 You can create orders, get all orders, get orders by an id number, get completed and active orders. The following outline how this is carried out:
 
 - GET route: `'api/orders'` [GET]
-- SHOW route: 'api/orders/:id' [GET]
-- POST route: 'api/orders' [POST] 
-- GET COMPLETE ORDER route: 'api/orders/complete/:id' [SHOW]
-- GET ACTIVE ORDER route: 'api/orders/active/:id' [SHOW]
+- SHOW route: `'api/orders/:id'` [GET]
+- POST route: `'api/orders'` [POST] 
+- GET COMPLETE ORDER route: `'api/orders/complete/:id'` [SHOW]
+- GET ACTIVE ORDER route: `'api/orders/active/:id'` [SHOW]
 
 ### Products
 You can create products, get all products, get products by an id number, get products by category, and delete a product. The following outline how this is carried out:
 
-- GET route: 'api/products' [GET]
-- GET route: 'api/products/category/:category' [GET]
-- SHOW route: 'api/products/:id' [GET]
-- POST route: 'api/products' [POST] 
-- DELETE route: 'api/products/:product_id' [DELETE]
+- GET route: `'api/products'` [GET]
+- GET route: `'api/products/category/:category'` [GET]
+- SHOW route: `'api/products/:id'` [GET]
+- POST route: `'api/products'` [POST] 
+- DELETE route: `'api/products/:product_id'` [DELETE]
 
 ### Users
 You can create users, get all users but based on JWT Authorization, get users by id but based on JWT Authorization The following outline how this is carried out:
 
-- GET route: 'api/users' [GET]
-- SHOW route: 'api/users/:id' [GET]
-- POST route: 'api/users' [POST] 
+- GET route: `'api/users'` [GET]
+- SHOW route: `'api/users/:id'` [GET]
+- POST route: `'api/users'` [POST] 
 
 ## Required Technologies
 Your application uses the following libraries:

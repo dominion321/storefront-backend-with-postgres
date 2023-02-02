@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
+const database_1 = __importDefault(require("../../database"));
 const server_1 = __importDefault(require("../../server"));
 const product_1 = require("../product");
 const request = (0, supertest_1.default)(server_1.default);
@@ -13,6 +14,13 @@ const product = {
     price: 300,
     category: 'food',
 };
+beforeAll(async () => {
+    const conn = await database_1.default.connect();
+    const sql = 'SELECT * FROM products';
+    const result = await conn.query(sql);
+    conn.release();
+    console.log(result.rows);
+});
 const category = 'food';
 describe('Product Model', () => {
     it('should have an index method', () => {

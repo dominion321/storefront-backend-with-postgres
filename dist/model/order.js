@@ -61,7 +61,7 @@ class OrderStore {
             return result.rows[0];
         }
         catch (error) {
-            throw new Error(`Cannot get current order of user ${user_id} ${error}`);
+            throw new Error(`Error from orders create model ${user_id} ${error}`);
         }
     }
     //COMPLETED ORDER Operation

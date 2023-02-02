@@ -6,15 +6,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const order_1 = require("../order");
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
+const order_2 = require("../../handlers/order");
+const database_1 = __importDefault(require("../../database"));
 const store = new order_1.OrderStore();
 const request = (0, supertest_1.default)(server_1.default);
 let stat = 'active';
+beforeAll(async () => {
+    const conn = await database_1.default.connect();
+    const sql = 'SELECT * FROM orders';
+    const result = await conn.query(sql);
+    conn.release();
+    console.log(result);
+});
 const newOrder = {
     status: stat,
     user_id: '1',
-    product_id: '1',
+    product_id: '3',
     quantity: '200',
 };
+const order = new order_2.OrderHandler();
 describe('Order Model', () => {
     it('should have an index method', () => {
         expect(store.index).toBeDefined();

@@ -1,19 +1,33 @@
 import { Order, OrderStore } from '../order';
 import supertest from 'supertest';
 import app from '../../server';
+import { OrderHandler } from '../../handlers/order';
+import client from '../../database';
 
 const store = new OrderStore();
 const request = supertest(app);
 
 let stat: string = 'active';
 
+beforeAll(async () => {
+  const conn = await client.connect();
+  const sql = 'SELECT * FROM orders';
+  const result = await conn.query(sql);
+  conn.release()
+
+  console.log(result);
+})
+
 const newOrder: Order = {
   status: stat,
   user_id: '1',
-  product_id: '1',
+  product_id: '3',
   quantity: '200',
 };
 
+
+
+const order = new OrderHandler();
 
 describe('Order Model', () => {
   it('should have an index method', () => {
@@ -42,6 +56,7 @@ describe('Order Endpoints', () => {
     const response = await request.get('/api/orders');
     expect(response.status).toBe(200);
   });
+
   it('should have a show method by endpoint', async () => {
     const response = await request.get('/api/orders/1');
     expect(response.status).toBe(200);

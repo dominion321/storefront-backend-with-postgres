@@ -37,7 +37,7 @@ export class OrderHandler {
   }
 
   async addProduct(_req: Request, res: Response) {
-    const orderId: string = _req.body.order_id;
+    const orderId: string = _req.params.id;
     const productId: string = _req.body.product_id;
     const quantity: number = _req.body.quantity;
 

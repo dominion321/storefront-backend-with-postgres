@@ -13,4 +13,5 @@ orders.get('/:id', orderMethods.show);
 orders.get('/complete/:id', verifyAuthToken_1["default"], orderMethods.completedOrder);
 orders.get('/active/:id', verifyAuthToken_1["default"], orderMethods.currentOrder);
 orders.post('/', orderMethods.create);
+orders.post('/:id/products', orderMethods.addProduct);
 exports["default"] = orders;

@@ -97,24 +97,19 @@ var OrderStore = /** @class */ (function () {
     //CREATE Operation
     OrderStore.prototype.create = function (o) {
         return __awaiter(this, void 0, void 0, function () {
-            var product_id, quantity, user_id, status, conn, sql, result, error_3;
+            var user_id, status, conn, sql, result, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        product_id = o.product_id, quantity = o.quantity, user_id = o.user_id, status = o.status;
+                        user_id = o.user_id, status = o.status;
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 4, , 5]);
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 2:
                         conn = _a.sent();
-                        sql = 'INSERT INTO orders(product_id, quantity, user_id, status) VALUES($1,$2,$3,$4) RETURNING *';
-                        return [4 /*yield*/, conn.query(sql, [
-                                product_id,
-                                quantity,
-                                user_id,
-                                status,
-                            ])];
+                        sql = 'INSERT INTO orders( user_id, status) VALUES($1,$2,$3,$4) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [user_id, status])];
                     case 3:
                         result = _a.sent();
                         conn.release();
@@ -127,10 +122,36 @@ var OrderStore = /** @class */ (function () {
             });
         });
     };
+    ;
+    OrderStore.prototype.addProducts = function (quantity, orderId, productId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, order, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, database_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = 'INSERT INTO orders_products(quantity, order_id, product_id) VALUES($1,$2,$3) RETURNING *';
+                        return [4 /*yield*/, conn.query(sql, [quantity, orderId, productId])];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        order = result.rows[0];
+                        return [2 /*return*/, order];
+                    case 3:
+                        error_4 = _a.sent();
+                        throw new Error("Error from add product model ".concat(error_4));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     //CURRENT ORDER Operation
     OrderStore.prototype.currentOrder = function (user_id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, error_4;
+            var conn, sql, result, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -145,8 +166,8 @@ var OrderStore = /** @class */ (function () {
                         conn.release();
                         return [2 /*return*/, result.rows[0]];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new Error("Error from orders create model ".concat(user_id, " ").concat(error_4));
+                        error_5 = _a.sent();
+                        throw new Error("Error from orders create model ".concat(user_id, " ").concat(error_5));
                     case 4: return [2 /*return*/];
                 }
             });
@@ -155,7 +176,7 @@ var OrderStore = /** @class */ (function () {
     //COMPLETED ORDER Operation
     OrderStore.prototype.completedOrder = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, result, error_5;
+            var conn, sql, result, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -170,8 +191,8 @@ var OrderStore = /** @class */ (function () {
                         conn.release();
                         return [2 /*return*/, result.rows];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new Error("Cannot get completed order of user ".concat(id, " ").concat(error_5));
+                        error_6 = _a.sent();
+                        throw new Error("Cannot get completed order of user ".concat(id, " ").concat(error_6));
                     case 4: return [2 /*return*/];
                 }
             });

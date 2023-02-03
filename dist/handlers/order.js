@@ -92,8 +92,6 @@ var OrderHandler = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         order = {
-                            product_id: _req.body.product_id,
-                            quantity: _req.body.quantity,
                             status: _req.body.status,
                             user_id: _req.body.user_id
                         };
@@ -113,9 +111,35 @@ var OrderHandler = /** @class */ (function () {
             });
         });
     };
+    OrderHandler.prototype.addProduct = function (_req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var orderId, productId, quantity, addedProduct, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        orderId = _req.params.id;
+                        productId = _req.body.product_id;
+                        quantity = _req.body.quantity;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, store.addProducts(quantity, productId, orderId)];
+                    case 2:
+                        addedProduct = _a.sent();
+                        res.status(201).json(addedProduct);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_4 = _a.sent();
+                        res.status(400).json(error_4);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     OrderHandler.prototype.currentOrder = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user_id, userOrder, error_4;
+            var user_id, userOrder, error_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -129,8 +153,8 @@ var OrderHandler = /** @class */ (function () {
                         res.status(200).json(userOrder);
                         return [3 /*break*/, 4];
                     case 3:
-                        error_4 = _a.sent();
-                        throw new Error("Error from orders current Order handler".concat(error_4, " "));
+                        error_5 = _a.sent();
+                        throw new Error("Error from orders current Order handler".concat(error_5, " "));
                     case 4: return [2 /*return*/];
                 }
             });
@@ -138,7 +162,7 @@ var OrderHandler = /** @class */ (function () {
     };
     OrderHandler.prototype.completedOrder = function (_req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user_id, userOrder, error_5;
+            var user_id, userOrder, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -152,8 +176,8 @@ var OrderHandler = /** @class */ (function () {
                         res.status(200).json(userOrder);
                         return [3 /*break*/, 4];
                     case 3:
-                        error_5 = _a.sent();
-                        throw new Error("Error from orders completed Order handler".concat(error_5, " "));
+                        error_6 = _a.sent();
+                        throw new Error("Error from orders completed Order handler".concat(error_6, " "));
                     case 4: return [2 /*return*/];
                 }
             });

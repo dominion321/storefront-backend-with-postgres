@@ -52,9 +52,13 @@ export class OrderStore {
     } catch (error) {
       throw new Error(`Cannot create order ${error}`);
     }
-  };
+  }
 
-  async addProducts(quantity: number, orderId: string, productId: string): Promise<Order> {
+  async addProducts(
+    quantity: number,
+    orderId: string,
+    productId: string
+  ): Promise<Order> {
     try {
       const conn = await Client.connect();
       const sql =
@@ -65,7 +69,6 @@ export class OrderStore {
 
       const order = result.rows[0];
       return order;
-
     } catch (error) {
       throw new Error(`Error from add product model ${error}`);
     }

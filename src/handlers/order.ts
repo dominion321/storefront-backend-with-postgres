@@ -49,7 +49,7 @@ export class OrderHandler {
       );
       res.status(201).json(addedProduct);
     } catch (error) {
-      res.status(400).json(error)
+      res.status(400).json(error);
     }
   }
 

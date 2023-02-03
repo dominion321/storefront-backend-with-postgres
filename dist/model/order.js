@@ -122,7 +122,6 @@ var OrderStore = /** @class */ (function () {
             });
         });
     };
-    ;
     OrderStore.prototype.addProducts = function (quantity, orderId, productId) {
         return __awaiter(this, void 0, void 0, function () {
             var conn, sql, result, order, error_4;

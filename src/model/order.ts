@@ -39,16 +39,13 @@ export class OrderStore {
 
   //CREATE Operation
   async create(o: Order): Promise<Order> {
-    const {  user_id, status } = o;
+    const { user_id, status } = o;
     try {
       const conn = await Client.connect();
       const sql =
         'INSERT INTO orders( user_id, status) VALUES($1,$2,$3,$4) RETURNING *';
 
-      const result = await conn.query(sql, [
-        user_id,
-        status,
-      ]);
+      const result = await conn.query(sql, [user_id, status]);
       conn.release();
 
       return result.rows[0];

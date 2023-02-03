@@ -52,6 +52,23 @@ export class OrderStore {
     } catch (error) {
       throw new Error(`Cannot create order ${error}`);
     }
+  };
+
+  async addProducts(quantity: number, orderId: string, productId: string): Promise<Order> {
+    try {
+      const conn = await Client.connect();
+      const sql =
+        'INSERT INTO orders_products(quantity, order_id, product_id) VALUES($1,$2,$3,$4) RETURNING *';
+
+      const result = await conn.query(sql, [quantity, orderId, productId]);
+      conn.release();
+
+      const order = result.rows[0];
+      return order;
+
+    } catch (error) {
+      throw new Error(`Error from add product model ${error}`);
+    }
   }
 
   //CURRENT ORDER Operation

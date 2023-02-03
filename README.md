@@ -25,6 +25,7 @@ You can create orders, get all orders, get orders by an id number, get completed
 - POST route: `'api/orders'` [POST] 
 - GET COMPLETE ORDER route: `'api/orders/complete/:id'` [SHOW]
 - GET ACTIVE ORDER route: `'api/orders/active/:id'` [SHOW]
+- POST PRODUCTS IN ORDER route `'api/orders/:id/products'` [POST]
 
 ### Products
 You can create products, get all products, get products by an id number, get products by category, and delete a product. The following outline how this is carried out:
@@ -41,6 +42,11 @@ You can create users, get all users but based on JWT Authorization, get users by
 - GET route: `'api/users'` [GET]
 - SHOW route: `'api/users/:id'` [GET]
 - POST route: `'api/users'` [POST] 
+
+### Extras
+In order to get all products that may have been added to an order, you can view this through the endpoint below:
+
+- GET product in orders route: `'api/dashboard/products_in_order'` [GET]
 
 ## Required Technologies
 This application uses the following libraries:

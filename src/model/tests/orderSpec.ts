@@ -2,7 +2,6 @@ import { Order, OrderStore } from '../order';
 import supertest from 'supertest';
 import app from '../../server';
 import { OrderHandler } from '../../handlers/order';
-import client from '../../database';
 
 const store = new OrderStore();
 const request = supertest(app);
@@ -11,9 +10,7 @@ let stat: string = 'active';
 
 const newOrder: Order = {
   status: stat,
-  user_id: '1',
-  product_id: '3',
-  quantity: '200',
+  user_id: '1'
 };
 
 const order = new OrderHandler();

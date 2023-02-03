@@ -7,5 +7,5 @@ var express_1 = __importDefault(require("express"));
 var dashboard_1 = require("../../handlers/dashboard");
 var dashboard = express_1["default"].Router();
 var dashboardMethods = new dashboard_1.DashboardHandlers();
-dashboard.get('/', dashboardMethods.productsInOrder);
+dashboard.get('/products_in_order', dashboardMethods.productsInOrder);
 exports["default"] = dashboard;

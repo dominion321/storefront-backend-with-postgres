@@ -37,7 +37,7 @@ class OrderStore {
         const { user_id, status } = o;
         try {
             const conn = await database_1.default.connect();
-            const sql = 'INSERT INTO orders( user_id, status) VALUES($1,$2,$3,$4) RETURNING *';
+            const sql = 'INSERT INTO orders( user_id, status) VALUES($1,$2) RETURNING *';
             const result = await conn.query(sql, [user_id, status]);
             conn.release();
             return result.rows[0];

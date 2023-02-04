@@ -12,7 +12,7 @@ const request = (0, supertest_1.default)(server_1.default);
 let stat = 'active';
 const newOrder = {
     status: stat,
-    user_id: '1',
+    user_id: '1'
 };
 const order = new order_2.OrderHandler();
 describe('Order Model', () => {

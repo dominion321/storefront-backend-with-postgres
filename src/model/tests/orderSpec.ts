@@ -12,8 +12,6 @@ let stat: string = 'active';
 const newOrder: Order = {
   status: stat,
   user_id: '1',
-  product_id: '3',
-  quantity: '200',
 };
 
 const order = new OrderHandler();

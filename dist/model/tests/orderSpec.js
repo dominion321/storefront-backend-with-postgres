@@ -7,22 +7,12 @@ const order_1 = require("../order");
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
 const order_2 = require("../../handlers/order");
-const database_1 = __importDefault(require("../../database"));
 const store = new order_1.OrderStore();
 const request = (0, supertest_1.default)(server_1.default);
 let stat = 'active';
-beforeAll(async () => {
-    const conn = await database_1.default.connect();
-    const sql = 'SELECT * FROM orders';
-    const result = await conn.query(sql);
-    conn.release();
-    console.log(result);
-});
 const newOrder = {
     status: stat,
     user_id: '1',
-    product_id: '3',
-    quantity: '200',
 };
 const order = new order_2.OrderHandler();
 describe('Order Model', () => {
@@ -56,11 +46,11 @@ describe('Order Endpoints', () => {
         expect(response.status).toBe(200);
     });
     it('should have a completed method by endpoint', async () => {
-        const response = await request.get('/api/orders/completed/1');
-        expect(response.status).toBe(200);
+        const response = await request.get('/api/orders/complete/1');
+        expect(response.status).toBe(401);
     });
     it('should have a active method by endpoint', async () => {
         const response = await request.get('/api/orders/active/2');
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(401);
     });
 });

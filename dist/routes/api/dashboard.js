@@ -2,10 +2,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const dashboard_1 = require("../../handlers/dashboard");
-const dashboard = express_1.default.Router();
-const dashboardMethods = new dashboard_1.DashboardHandlers();
+exports.__esModule = true;
+var express_1 = __importDefault(require("express"));
+var dashboard_1 = require("../../handlers/dashboard");
+var dashboard = express_1["default"].Router();
+var dashboardMethods = new dashboard_1.DashboardHandlers();
 dashboard.get('/products_in_order', dashboardMethods.productsInOrder);
-exports.default = dashboard;
+exports["default"] = dashboard;

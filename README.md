@@ -5,13 +5,16 @@
 
 ## Setup and Required Document edits 
 - To make this application tailored to your specifications, you need to create a `.env` file. Follow the requirements for that file from the `.example-env` file.
-- You would also need to run `docker compose up` to set up the database for the application.
-- Afterwards, run `db-migrate up` to create all given tables.
+- You would also need to run `docker compose up` to set up the database for the application. 
+### Note:
+ Having the docker desktop application is a requirement to carry out this operation. To install, visit `https://docs.docker.com/engine/install/`
 
 ## Scripts to run
 - To get started with the application, run <code>npm install</code> in your console.
 
-- To build and run the application, run <code>npm run watch</code>.
+- Afterwards, run `db-migrate up` to create all given tables.
+
+- To build and run the application, run <code>npm run watch</code>. The appliation runs on port 3000 of the localhost. Type in `http://localhost:3000` to open the application in the browser.
 
 - To test the application, run <code>npm run test</code>.
 

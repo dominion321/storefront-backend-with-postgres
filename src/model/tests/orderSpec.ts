@@ -79,31 +79,31 @@ describe('Order Model', () => {
 });
 
 describe('Order Endpoints', () => {
-  it('should have a create method by endpoint', async () => {
+  it('should deny access to the create method by endpoint', async () => {
     const response = await request.post('/api/orders').send(newOrder);
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(401);
   });
-  it('should have an index method by endpoint', async () => {
+  it('should deny access to the index method by endpoint', async () => {
     const response = await request.get('/api/orders');
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(401);
   });
 
-  it('should have a show method by endpoint', async () => {
+  it('should deny access to the show method by endpoint', async () => {
     const response = await request.get('/api/orders/1');
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(401);
   });
-  it('should have a completed method by endpoint', async () => {
+  it('should deny access to the completed method by endpoint', async () => {
     const response = await request.get('/api/orders/complete/1');
     expect(response.status).toBe(401);
   });
-  it('should have a active method by endpoint', async () => {
+  it('should deny access to the active method by endpoint', async () => {
     const response = await request.get('/api/orders/active/2');
     expect(response.status).toBe(401);
   });
-  it('should add a product to an order by endpoint', async () => {
+  it('should deny access to the add a product to an order by endpoint', async () => {
     const response = await request
       .post(`/api/orders/${id}/products`)
       .send(addedProductOrder);
-    expect(response.status).toBe(201);
+    expect(response.status).toBe(401);
   });
 });

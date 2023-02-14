@@ -69,7 +69,7 @@ describe('Order Endpoints', () => {
     expect(response.status).toBe(401);
   });
   it('should add a product to an order by endpoint', async () => {
-    const response = await request.post('/api/orders/3/products').send(addedProduct);
+    const response = await request.post('/api/orders/1/products').send(addedProduct);
     expect(response.status).toBe(201);
   });
 });

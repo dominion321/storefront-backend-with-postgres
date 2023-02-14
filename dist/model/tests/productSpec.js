@@ -28,7 +28,7 @@ describe('Product Model', () => {
         expect(store.productsByCategory(category)).toBeDefined();
     });
     it('should successfully delete a product', () => {
-        expect(store.destory('1')).toBeDefined();
+        expect(store.destroy('1')).toBeDefined();
     });
 });
 describe('Product Endpoints', () => {

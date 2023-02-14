@@ -45,7 +45,7 @@ class ProductHandler {
     async destroy(_req, res) {
         const product_id = _req.params.product_id;
         try {
-            const deleted = await store.destory(product_id);
+            const deleted = await store.destroy(product_id);
             res.status(200).json(`Delete successful`);
         }
         catch (error) {

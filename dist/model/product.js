@@ -53,7 +53,7 @@ class ProductStore {
             throw new Error(`Error from products by category method ${error}`);
         }
     }
-    async destory(product_id) {
+    async destroy(product_id) {
         try {
             const conn = await database_1.default.connect();
             const sql = 'DELETE FROM products WHERE id=$1';

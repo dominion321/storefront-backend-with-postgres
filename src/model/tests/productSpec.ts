@@ -13,6 +13,7 @@ const product: Product = {
 
 const category = 'food';
 
+
 describe('Product Model', () => {
   it('should have an index method', () => {
     expect(store.index).toBeDefined();
@@ -30,7 +31,7 @@ describe('Product Model', () => {
   });
 
   it('should successfully delete a product', () => {
-    expect(store.destory('1')).toBeDefined();
+    expect(store.destroy('1')).toBeDefined();
   });
 });
 

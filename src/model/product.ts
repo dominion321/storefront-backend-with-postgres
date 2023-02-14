@@ -65,7 +65,7 @@ export class ProductStore {
     }
   }
 
-  async destory(product_id: string): Promise<void> {
+  async destroy(product_id: string): Promise<void> {
     try {
       const conn = await Client.connect();
       const sql = 'DELETE FROM products WHERE id=$1';

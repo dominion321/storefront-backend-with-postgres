@@ -1,5 +1,4 @@
 import supertest from 'supertest';
-import client from '../../database';
 import app from '../../server';
 import { Product, ProductStore } from '../product';
 

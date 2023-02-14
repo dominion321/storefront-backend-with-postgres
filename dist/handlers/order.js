@@ -46,6 +46,7 @@ class OrderHandler {
         }
         catch (error) {
             res.status(400).json(error);
+            throw new Error(`Error from orders current Order handler${error} `);
         }
     }
     async currentOrder(_req, res) {

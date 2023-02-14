@@ -37,7 +37,6 @@ The following are the data shapes of the given tables in the application.
 - id: integer
 - id of each product in the order: big integer
 - id of the given order: big integer
-
 - quantity of each product in the order: integer
 
 #### Orders

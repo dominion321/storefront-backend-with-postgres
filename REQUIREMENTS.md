@@ -40,7 +40,7 @@ The following are the data shapes of the given tables in the application.
 
 - quantity of each product in the order: integer
 
-#### Orders_Products
+#### Orders
 - id: integer
 - status of order (active or complete) : varchar(64)
 - user_id: big integer

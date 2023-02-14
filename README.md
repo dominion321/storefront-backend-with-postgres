@@ -9,8 +9,8 @@
 ### Note:
  Having the docker desktop application is a requirement to carry out this operation. To install, visit [this website](https://docs.docker.com/engine/install/)
  - To run the application with a locally installed postgres application, you can follow the instructions:
- - - In the PSQL terminal, create a database user using : `CREATE USER <name of user> WITH PASSWORD <password of your choice>;`.
- - - Then, create a database using: `CREATE DATABASE <database of your choice>;`
+  - In the PSQL terminal, create a database user using : `CREATE USER <name of user> WITH PASSWORD <password of your choice>;`.
+  - Then, create a database using: `CREATE DATABASE <database of your choice>;`
  - - 
 
 ## Scripts to run

@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
 const product_1 = require("../product");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const { TOKEN } = process.env;
 const request = (0, supertest_1.default)(server_1.default);
 const store = new product_1.ProductStore();
 const product = {
@@ -28,7 +31,7 @@ describe('Product Model', () => {
         expect(store.productsByCategory(category)).toBeDefined();
     });
     it('should successfully delete a product', () => {
-        expect(store.destroy('1')).toBeDefined();
+        expect(store.destroy('2')).toBeDefined();
     });
 });
 describe('Product Endpoints', () => {
@@ -40,7 +43,7 @@ describe('Product Endpoints', () => {
         const response = await request.get('/api/products/1');
         expect(response.status).toBe(200);
     });
-    it('should successfully create a product by endpoint', async () => {
+    it('should deny access when creating a product by endpoint', async () => {
         const response = await request.post('/api/products').send(product);
         expect(response.status).toBe(401);
     });
@@ -51,7 +54,7 @@ describe('Product Endpoints', () => {
     });
     it('should throw access denied when trying to delete products by endpoint', async () => {
         await request.post(`/api/products`).send(product);
-        const response = await request.delete(`/api/products/2`);
+        const response = await request.delete(`/api/products/2000`);
         expect(response.status).toBe(401);
     });
 });

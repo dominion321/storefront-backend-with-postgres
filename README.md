@@ -4,7 +4,7 @@
 - This repo contains the backend solution of the storfront backend project. To get started, clone this repo and run `npm install` in your terminal at the project root. 
 
 ## Setup and Required Document edits 
-- To make this application tailored to your specifications, you need to create a `.env` file. Follow the requirements for that file from the `.example-env` file.
+- To make this application tailored to your specifications, you need to create a `.env` file. Follow the requirements for that file from the `.example-env` file. To test, set ENV=test. To run on development mode, set ENV=dev
 - You would also need to run `docker compose up` to set up the database for the application. 
 ### Note:
  Having the docker desktop application is a requirement to carry out this operation. To install, visit [this website](https://docs.docker.com/engine/install/)

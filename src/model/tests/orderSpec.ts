@@ -1,25 +1,57 @@
 import { Order, OrderStore } from '../order';
+import { User, UserStore } from '../user';
 import supertest from 'supertest';
 import app from '../../server';
-import { OrderHandler } from '../../handlers/order';
+import client from '../../database';
 
 const store = new OrderStore();
+const userStore = new UserStore();
 const request = supertest(app);
 
 let stat: string = 'active';
 
 const newOrder: Order = {
   status: stat,
-  user_id: '1'
+  user_id: '1',
 };
 
-const addedProduct = {
-  quantity : 1,
-  productId : 1,
-  orderId: 1
-}
+const addedProductOrder = {
+  quantity: 1,
+  productId: 1,
+  orderId: 1,
+};
 
-const order = new OrderHandler();
+const product = {
+  name: 'test',
+  price: 10,
+  category: 'food',
+};
+
+let id: string;
+const { name, price, category } = product;
+
+beforeAll(async () => {
+  try {
+    const conn = await client.connect();
+    const sql =
+      'INSERT INTO products (name, price, category) VALUES($1,$2,$3) RETURNING *';
+    const result = await conn.query(sql, [name, price, category]);
+    conn.release();
+    id = result.rows[0]['id'];
+  } catch (err) {
+    throw new Error(`${err} from orderSpec`);
+  }
+});
+
+beforeAll(async () => {
+  const newUser: User = {
+    firstname: 'lol',
+    lastname: 'namama',
+    password: 'chai',
+  };
+  const user = await userStore.create(newUser);
+  const user_id = user.id;
+});
 
 describe('Order Model', () => {
   it('should have an index method', () => {
@@ -69,7 +101,9 @@ describe('Order Endpoints', () => {
     expect(response.status).toBe(401);
   });
   it('should add a product to an order by endpoint', async () => {
-    const response = await request.post('/api/orders/1/products').send(addedProduct);
+    const response = await request
+      .post(`/api/orders/${id}/products`)
+      .send(addedProductOrder);
     expect(response.status).toBe(201);
   });
 });

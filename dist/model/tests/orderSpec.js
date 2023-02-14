@@ -4,22 +4,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const order_1 = require("../order");
+const user_1 = require("../user");
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
-const order_2 = require("../../handlers/order");
+const database_1 = __importDefault(require("../../database"));
 const store = new order_1.OrderStore();
+const userStore = new user_1.UserStore();
 const request = (0, supertest_1.default)(server_1.default);
 let stat = 'active';
 const newOrder = {
     status: stat,
-    user_id: '1'
+    user_id: '1',
 };
-const addedProduct = {
+const addedProductOrder = {
     quantity: 1,
     productId: 1,
-    orderId: 1
+    orderId: 1,
 };
-const order = new order_2.OrderHandler();
+const product = {
+    name: 'test',
+    price: 10,
+    category: 'food',
+};
+let id;
+const { name, price, category } = product;
+beforeAll(async () => {
+    try {
+        const conn = await database_1.default.connect();
+        const sql = 'INSERT INTO products (name, price, category) VALUES($1,$2,$3) RETURNING *';
+        const result = await conn.query(sql, [name, price, category]);
+        conn.release();
+        id = result.rows[0]['id'];
+    }
+    catch (err) {
+        throw new Error(`${err} from orderSpec`);
+    }
+});
+beforeAll(async () => {
+    const newUser = {
+        firstname: 'lol',
+        lastname: 'namama',
+        password: 'chai',
+    };
+    const user = await userStore.create(newUser);
+    const user_id = user.id;
+});
 describe('Order Model', () => {
     it('should have an index method', () => {
         expect(store.index).toBeDefined();
@@ -62,7 +91,9 @@ describe('Order Endpoints', () => {
         expect(response.status).toBe(401);
     });
     it('should add a product to an order by endpoint', async () => {
-        const response = await request.post('/api/orders/3/products').send(addedProduct);
+        const response = await request
+            .post(`/api/orders/${id}/products`)
+            .send(addedProductOrder);
         expect(response.status).toBe(201);
     });
 });

@@ -10,14 +10,14 @@ let stat: string = 'active';
 
 const newOrder: Order = {
   status: stat,
-  user_id: '1'
+  user_id: '1',
 };
 
 const addedProduct = {
-  quantity : 1,
-  productId : 1,
-  orderId: 1
-}
+  quantity: 1,
+  productId: 1,
+  orderId: 1,
+};
 
 const order = new OrderHandler();
 
@@ -41,7 +41,7 @@ describe('Order Model', () => {
   it('should have a current order method', () => {
     expect(store.currentOrder).toBeDefined();
   });
-  it('should add a product to an order method', () => {
+  it('should  have an add product to an order method', () => {
     expect(store.addProducts).toBeDefined();
   });
 });
@@ -69,7 +69,9 @@ describe('Order Endpoints', () => {
     expect(response.status).toBe(401);
   });
   it('should add a product to an order by endpoint', async () => {
-    const response = await request.post('/api/orders/1/products').send(addedProduct);
+    const response = await request
+      .post('/api/orders/3/products')
+      .send(addedProduct);
     expect(response.status).toBe(201);
   });
 });

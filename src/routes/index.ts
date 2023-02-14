@@ -8,6 +8,6 @@ const routes = express.Router();
 routes.use('/users', users);
 routes.use('/products', products);
 routes.use('/orders', orders);
-routes.use('/dashboard', dashboard)
+routes.use('/dashboard', dashboard);
 
 export default routes;

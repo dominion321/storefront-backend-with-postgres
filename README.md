@@ -15,6 +15,7 @@
 - Afterwards, run `db-migrate up` to create all given tables.
 
 - To build and run the application, run <code>npm run watch</code>. The application runs on port 3000 of the localhost. Type in `http://localhost:3000` to open the application in the browser.
+- Also note that the database is running on port 5432.
 
 - To test the application, run <code>npm run test</code>.
 

@@ -7,11 +7,11 @@
 - To make this application tailored to your specifications, you need to create a `.env` file. Follow the requirements for that file from the `.example-env` file. To test, set ENV=test. To run on development mode, set ENV=dev
 - You would also need to run `docker compose up` to set up the database for the application. 
 ### Note:
- Having the docker desktop application is a requirement to carry out this operation. To install, visit [this website](https://docs.docker.com/engine/install/)
- - To run the application with a locally installed postgres application, you can follow the instructions:
-  - In the PSQL terminal, create a database user using : `CREATE USER <name of user> WITH PASSWORD <password of your choice>;`.
-  - Then, create a database using: `CREATE DATABASE <database of your choice>;`
- - - 
+ Having the docker desktop application is a requirement to carry out this operation. To install, visit [this website](https://docs.docker.com/engine/install/). However, to run the application with a locally installed postgres application, you can follow the instructions:
+- In the PSQL terminal, create a database user using : `CREATE USER <name of user> WITH PASSWORD <password of your choice>;`.
+- Create a database using: `CREATE DATABASE <database of your choice>;`
+- Grant the newly created database user full privileges for the newly created database using: `GRANT ALL PRIVILEGES ON DATABASE <database of your choice> TO <name of user>;`. 
+- After this, you are good to go!😉
 
 ## Scripts to run
 - To get started with the application, run <code>npm install</code> in your console.

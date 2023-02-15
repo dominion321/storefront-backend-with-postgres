@@ -33,7 +33,6 @@ export class ProductStore {
     conn.release();
 
     const product = result.rows[0];
-    console.log(result.rows);
     return product;
   }
 
@@ -72,7 +71,7 @@ export class ProductStore {
       const conn = await Client.connect();
       const sql = 'DELETE FROM products WHERE id=$1';
 
-      const result = await Client.query(sql, [product_id]);
+      await Client.query(sql, [product_id]);
       conn.release();
 
       return true;

@@ -60,9 +60,12 @@ beforeAll(async () => {
 //Creating a Product first to aid test
 beforeAll(async () => {
   try {
-    const newProd = await productStore.create(product);
-    
-  } catch (error) {}
+    await productStore.create(product);
+  } catch (error) {
+    throw new Error(
+      `${error} from order spec create new product in beforeAll function`
+    );
+  }
 });
 
 // <=========== ** THE TESTS ** ===========>

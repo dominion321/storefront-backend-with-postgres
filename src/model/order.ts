@@ -68,6 +68,7 @@ export class OrderStore {
       conn.release();
 
       const order = result.rows[0];
+      console.log(order);
       return order;
     } catch (error) {
       throw new Error(`Error from add product model ${error}`);

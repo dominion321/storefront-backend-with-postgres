@@ -8,7 +8,6 @@ const server_1 = __importDefault(require("../../server"));
 const product_1 = require("../product");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const { TOKEN } = process.env;
 const request = (0, supertest_1.default)(server_1.default);
 const store = new product_1.ProductStore();
 const product = {

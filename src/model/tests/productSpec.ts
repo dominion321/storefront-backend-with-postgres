@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { TOKEN } = process.env;
 const request = supertest(app);
 const store = new ProductStore();
 

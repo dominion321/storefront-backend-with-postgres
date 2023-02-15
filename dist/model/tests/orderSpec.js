@@ -7,66 +7,81 @@ const order_1 = require("../order");
 const user_1 = require("../user");
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
-const database_1 = __importDefault(require("../../database"));
-const store = new order_1.OrderStore();
+const product_1 = require("../product");
+const orderStore = new order_1.OrderStore();
 const userStore = new user_1.UserStore();
+const productStore = new product_1.ProductStore();
 const request = (0, supertest_1.default)(server_1.default);
-let stat = 'active';
 const newOrder = {
-    status: stat,
+    status: 'active',
     user_id: '1',
+};
+const newUser = {
+    firstname: 'test',
+    lastname: 'test',
+    password: 'testing',
 };
 const addedProductOrder = {
     quantity: 1,
-    productId: 1,
-    orderId: 1,
+    orderId: '1',
 };
 const product = {
     name: 'test',
-    price: 10,
-    category: 'food',
+    price: 1000,
+    category: 'test',
 };
+const { quantity, orderId } = addedProductOrder;
+let userId;
 let id;
-const { name, price, category } = product;
+let productId;
 beforeAll(async () => {
     try {
-        const conn = await database_1.default.connect();
-        const sql = 'INSERT INTO products (name, price, category) VALUES($1,$2,$3) RETURNING *';
-        const result = await conn.query(sql, [name, price, category]);
-        conn.release();
-        id = result.rows[0]['id'];
+        const user = await userStore.create(newUser);
+        const { id } = user;
+        userId = id;
     }
-    catch (err) {
-        throw new Error(`${err} from orderSpec`);
+    catch (error) {
+        throw new Error(`${error} from create user at orderspec`);
     }
 });
 beforeAll(async () => {
-    const newUser = {
-        firstname: 'lol',
-        lastname: 'namama',
-        password: 'chai',
-    };
-    const user = await userStore.create(newUser);
-    const user_id = user.id;
+    try {
+        const newProd = await productStore.create(product);
+        const { id } = newProd[0];
+        const productId = id;
+    }
+    catch (error) {
+    }
 });
 describe('Order Model', () => {
-    it('should have an index method', () => {
-        expect(store.index).toBeDefined();
+    it('should have an index method', async () => {
+        await orderStore.create(newOrder);
+        const result = await orderStore.index();
+        expect(result.length).toBeGreaterThan(0);
     });
-    it('should have a show method', () => {
-        expect(store.show).toBeDefined();
+    it('should have a show method', async () => {
+        const result = await orderStore.show(userId);
+        expect(result.user_id).toBe(`${userId}`);
     });
-    it('should have a create method', () => {
-        expect(store.create(newOrder)).toBeDefined();
+    it('should have a create method', async () => {
+        const result = await orderStore.create(newOrder);
+        expect(result.status).toBe('active');
     });
-    it('should have a completed order method', () => {
-        expect(store.completedOrder).toBeDefined();
+    it('should have a completed order method', async () => {
+        const order = {
+            status: 'complete',
+            user_id: '1',
+        };
+        const result = await orderStore.create(order);
+        expect(result.status).toBe('complete');
     });
-    it('should have a current order method', () => {
-        expect(store.currentOrder).toBeDefined();
+    it('should have a current order method', async () => {
+        const result = await orderStore.create(newOrder);
+        expect(result.status).toBe('active');
     });
-    it('should  have an add product to an order method', () => {
-        expect(store.addProducts).toBeDefined();
+    it('should have an add product to an order method', async () => {
+        const newOrderAdded = await orderStore.addProducts(quantity, orderId, productId);
+        expect(newOrderAdded.id).toBe(1);
     });
 });
 describe('Order Endpoints', () => {

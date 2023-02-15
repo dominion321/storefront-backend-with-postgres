@@ -41,7 +41,6 @@ const product: Product = {
   category: 'test',
 };
 
-
 //Initialized ids for user, order and product
 let userId: string;
 let id: string;
@@ -70,7 +69,6 @@ beforeAll(async () => {
 // <=========== ** THE TESTS ** ===========>
 describe('Order Model', () => {
   it('should have an index method', async () => {
-
     //Create an order first before fetching order index
     await orderStore.create(newOrder);
     const result = await orderStore.index();

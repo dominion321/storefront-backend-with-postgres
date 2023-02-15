@@ -14,20 +14,20 @@ const product: Product = {
   category: 'food',
 };
 
-let productId: string ;
+let productId: string;
 
 const category = 'food';
 
 describe('Product Model', () => {
   it('should successfully create a product', async () => {
     const newProd = await store.create(product);
-    const {id} = newProd;
+    const { id } = newProd;
     productId = id as string;
     expect(newProd.id).toBe(productId);
   });
 
-  it('should have an index method', async() => {
-    const index = await store.index()
+  it('should have an index method', async () => {
+    const index = await store.index();
     expect(index.length).toBeGreaterThan(0);
   });
 
@@ -39,7 +39,7 @@ describe('Product Model', () => {
     expect(store.productsByCategory(category)).toBeDefined();
   });
 
-  it('should successfully delete a product', async() => {
+  it('should successfully delete a product', async () => {
     const destroy = await store.destroy(productId);
     expect(destroy).toBe(true);
   });

@@ -56,11 +56,11 @@ beforeAll(async () => {
 //Creating a Product first to aid test
 beforeAll(async () => {
     try {
-        const newProd = await productStore.create(product);
-        const { id } = newProd;
-        const productId = id;
+        await productStore.create(product);
     }
-    catch (error) { }
+    catch (error) {
+        throw new Error(`${error} from order spec create new product in beforeAll function`);
+    }
 });
 // <=========== ** THE TESTS ** ===========>
 describe('Order Model', () => {

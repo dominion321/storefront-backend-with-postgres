@@ -26,7 +26,6 @@ class ProductStore {
         const result = await conn.query(sql, [p.name, p.price, p.category]);
         conn.release();
         const product = result.rows[0];
-        console.log(result.rows);
         return product;
     }
     //SHOW Operation
@@ -59,7 +58,7 @@ class ProductStore {
         try {
             const conn = await database_1.default.connect();
             const sql = 'DELETE FROM products WHERE id=$1';
-            const result = await database_1.default.query(sql, [product_id]);
+            await database_1.default.query(sql, [product_id]);
             conn.release();
             return true;
         }

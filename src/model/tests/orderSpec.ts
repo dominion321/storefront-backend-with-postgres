@@ -62,7 +62,7 @@ beforeAll(async () => {
 beforeAll(async () => {
   try {
     const newProd = await productStore.create(product);
-    const { id } = newProd[0];
+    const { id } = newProd;
     const productId = id;
   } catch (error) {}
 });

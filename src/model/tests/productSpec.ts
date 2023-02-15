@@ -14,26 +14,34 @@ const product: Product = {
   category: 'food',
 };
 
+let productId: string ;
+
 const category = 'food';
 
 describe('Product Model', () => {
-  it('should have an index method', () => {
-    expect(store.index).toBeDefined();
+  it('should successfully create a product', async () => {
+    const newProd = await store.create(product);
+    const {id} = newProd;
+    productId = id as string;
+    expect(newProd.id).toBe(productId);
   });
 
-  it('should successfully create a product', () => {
-    expect(store.create(product)).toBeDefined();
+  it('should have an index method', async() => {
+    const index = await store.index()
+    expect(index.length).toBeGreaterThan(0);
   });
 
-  it('should successfully show a product', () => {
-    expect(store.show('1')).toBeDefined();
+  it('should successfully show a product', async () => {
+    const show = await store.show(productId);
+    expect(show.id).toBe(productId);
   });
   it('should successfully show products by given category', () => {
     expect(store.productsByCategory(category)).toBeDefined();
   });
 
-  it('should successfully delete a product', () => {
-    expect(store.destroy('2')).toBeDefined();
+  it('should successfully delete a product', async() => {
+    const destroy = await store.destroy(productId);
+    expect(destroy).toBe(true);
   });
 });
 

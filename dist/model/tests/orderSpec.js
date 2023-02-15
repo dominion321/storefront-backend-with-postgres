@@ -8,32 +8,41 @@ const user_1 = require("../user");
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
 const product_1 = require("../product");
+//Instances for the order, user and product objects
 const orderStore = new order_1.OrderStore();
 const userStore = new user_1.UserStore();
 const productStore = new product_1.ProductStore();
+//Instance for the supertest module
 const request = (0, supertest_1.default)(server_1.default);
+//Order object
 const newOrder = {
     status: 'active',
     user_id: '1',
 };
+//User object
 const newUser = {
     firstname: 'test',
     lastname: 'test',
     password: 'testing',
 };
+//Object for use in the add product to order test
 const addedProductOrder = {
     quantity: 1,
     orderId: '1',
 };
+//Destructured values from the addedProductOrder object
+const { quantity, orderId } = addedProductOrder;
+//Product object
 const product = {
     name: 'test',
     price: 1000,
     category: 'test',
 };
-const { quantity, orderId } = addedProductOrder;
+//Initialized ids for user, order and product
 let userId;
 let id;
 let productId;
+//Creating a User first to aid tests
 beforeAll(async () => {
     try {
         const user = await userStore.create(newUser);
@@ -44,17 +53,19 @@ beforeAll(async () => {
         throw new Error(`${error} from create user at orderspec`);
     }
 });
+//Creating a Product first to aid test
 beforeAll(async () => {
     try {
         const newProd = await productStore.create(product);
-        const { id } = newProd[0];
+        const { id } = newProd;
         const productId = id;
     }
-    catch (error) {
-    }
+    catch (error) { }
 });
+// <=========== ** THE TESTS ** ===========>
 describe('Order Model', () => {
     it('should have an index method', async () => {
+        //Create an order first before fetching order index
         await orderStore.create(newOrder);
         const result = await orderStore.index();
         expect(result.length).toBeGreaterThan(0);

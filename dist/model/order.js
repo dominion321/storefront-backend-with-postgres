@@ -53,7 +53,6 @@ class OrderStore {
             const result = await conn.query(sql, [quantity, orderId, productId]);
             conn.release();
             const order = result.rows[0];
-            console.log(order);
             return order;
         }
         catch (error) {

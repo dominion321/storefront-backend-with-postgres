@@ -25,7 +25,9 @@ class ProductStore {
         const sql = 'INSERT INTO products(name, price, category) VALUES ($1,$2,$3) RETURNING *';
         const result = await conn.query(sql, [p.name, p.price, p.category]);
         conn.release();
-        return result.rows[0];
+        const product = result.rows[0];
+        console.log(result.rows);
+        return product;
     }
     //SHOW Operation
     async show(id) {
@@ -59,7 +61,7 @@ class ProductStore {
             const sql = 'DELETE FROM products WHERE id=$1';
             const result = await database_1.default.query(sql, [product_id]);
             conn.release();
-            return;
+            return true;
         }
         catch (error) {
             throw new Error(`Could Not Delete. ${error}`);

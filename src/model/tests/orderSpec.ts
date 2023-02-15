@@ -47,7 +47,7 @@ let userId: string;
 let id: string;
 let productId: string;
 
-//Creating a User to aid tests
+//Creating a User first to aid tests
 beforeAll(async () => {
   try {
     const user = await userStore.create(newUser);
@@ -58,7 +58,7 @@ beforeAll(async () => {
   }
 });
 
-//Creating a Product to aid test
+//Creating a Product first to aid test
 beforeAll(async () => {
   try {
     const newProd = await productStore.create(product);
@@ -70,6 +70,8 @@ beforeAll(async () => {
 // <=========== ** THE TESTS ** ===========>
 describe('Order Model', () => {
   it('should have an index method', async () => {
+
+    //Create an order first before fetching order index
     await orderStore.create(newOrder);
     const result = await orderStore.index();
     expect(result.length).toBeGreaterThan(0);

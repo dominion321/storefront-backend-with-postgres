@@ -17,7 +17,7 @@ const newUser: User = {
 let userId: string;
 
 describe('User Model', () => {
-  it('should have an create method', async () => {
+  it('should have a create method', async () => {
     const user = await store.create(newUser);
     const { id } = user;
     userId = id as string;
@@ -36,7 +36,7 @@ describe('User Model', () => {
 });
 
 describe('User Endpoint', () => {
-  it('should have an create method by endpoint', async () => {
+  it('should have a create method by endpoint', async () => {
     const response = await request.post('/api/users').send(newUser);
     expect(response.status).toBe(201);
   });

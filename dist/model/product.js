@@ -25,7 +25,8 @@ class ProductStore {
         const sql = 'INSERT INTO products(name, price, category) VALUES ($1,$2,$3) RETURNING *';
         const result = await conn.query(sql, [p.name, p.price, p.category]);
         conn.release();
-        return result.rows[0];
+        const product = result.rows[0];
+        return product;
     }
     //SHOW Operation
     async show(id) {
@@ -53,13 +54,13 @@ class ProductStore {
             throw new Error(`Error from products by category method ${error}`);
         }
     }
-    async destory(product_id) {
+    async destroy(product_id) {
         try {
             const conn = await database_1.default.connect();
             const sql = 'DELETE FROM products WHERE id=$1';
-            const result = await database_1.default.query(sql, [product_id]);
+            await database_1.default.query(sql, [product_id]);
             conn.release();
-            return;
+            return true;
         }
         catch (error) {
             throw new Error(`Could Not Delete. ${error}`);

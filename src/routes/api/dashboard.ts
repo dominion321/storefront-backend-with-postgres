@@ -1,5 +1,5 @@
-import express from "express";
-import { DashboardHandlers } from "../../handlers/dashboard";
+import express from 'express';
+import { DashboardHandlers } from '../../handlers/dashboard';
 
 const dashboard = express.Router();
 const dashboardMethods = new DashboardHandlers();

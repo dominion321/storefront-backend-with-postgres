@@ -20,22 +20,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Completed Orders by user (args: user id)[token required]
 
 ## Data Shapes
+The following are the data shapes of the given tables in the application.
 #### Product
--  id
-- name
-- price
-- category
+-  id: integer
+- name: varchar(64)
+- price: integer
+- category: varchar
 
 #### User
-- id
-- firstName
-- lastName
-- password
+- id: integer
+- firstName: varchar(100)
+- lastName: varchar(100)
+- password: varchar
+
+#### Orders_Products
+- id: integer
+- id of each product in the order: big integer
+- id of the given order: big integer
+- quantity of each product in the order: integer
 
 #### Orders
-- id
-- id of each product in the order
-- quantity of each product in the order
-- user_id
-- status of order (active or complete)
+- id: integer
+- status of order (active or complete) : varchar(64)
+- user_id: big integer
 

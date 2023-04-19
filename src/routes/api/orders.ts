@@ -6,11 +6,11 @@ const orderMethods = new OrderHandler();
 
 const orders = express.Router();
 
-orders.get('/', orderMethods.index);
-orders.get('/:id', orderMethods.show);
+orders.get('/', verifyAuthToken, orderMethods.index);
+orders.get('/:id', verifyAuthToken, orderMethods.show);
 orders.get('/complete/:id', verifyAuthToken, orderMethods.completedOrder);
 orders.get('/active/:id', verifyAuthToken, orderMethods.currentOrder);
-orders.post('/', orderMethods.create);
-orders.post('/:id/products', orderMethods.addProduct);
+orders.post('/', verifyAuthToken, orderMethods.create);
+orders.post('/:id/products', verifyAuthToken, orderMethods.addProduct);
 
 export default orders;

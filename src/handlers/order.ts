@@ -50,6 +50,7 @@ export class OrderHandler {
       res.status(201).json(addedProduct);
     } catch (error) {
       res.status(400).json(error);
+      throw new Error(`Error from orders current Order handler${error} `);
     }
   }
 

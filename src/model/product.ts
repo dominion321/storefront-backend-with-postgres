@@ -24,7 +24,7 @@ export class ProductStore {
   }
 
   //CREATE Operation
-  async create(p: Product): Promise<Product[]> {
+  async create(p: Product): Promise<Product> {
     const conn = await Client.connect();
     const sql =
       'INSERT INTO products(name, price, category) VALUES ($1,$2,$3) RETURNING *';
@@ -32,11 +32,12 @@ export class ProductStore {
     const result = await conn.query(sql, [p.name, p.price, p.category]);
     conn.release();
 
-    return result.rows[0];
+    const product = result.rows[0];
+    return product;
   }
 
   //SHOW Operation
-  async show(id: string): Promise<Product[]> {
+  async show(id: string): Promise<Product> {
     try {
       const conn = await Client.connect();
       const sql = 'SELECT * FROM products WHERE id=($1)';
@@ -65,21 +66,21 @@ export class ProductStore {
     }
   }
 
-  async destory(product_id: string): Promise<void> {
+  async destroy(product_id: string): Promise<boolean> {
     try {
       const conn = await Client.connect();
       const sql = 'DELETE FROM products WHERE id=$1';
 
-      const result = await Client.query(sql, [product_id]);
+      await Client.query(sql, [product_id]);
       conn.release();
 
-      return;
+      return true;
     } catch (error) {
       throw new Error(`Could Not Delete. ${error}`);
     }
   }
   //UPDATE Operation
-  async update(p: Product): Promise<Product[]> {
+  async update(p: Product): Promise<Product> {
     try {
       const { name, price, category, id } = p;
       const conn = await Client.connect();

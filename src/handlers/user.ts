@@ -1,4 +1,4 @@
-import { Application, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { User, UserStore } from '../model/user';
 import jwt from 'jsonwebtoken';
